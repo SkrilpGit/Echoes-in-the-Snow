@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://djy253l4fr2cb"
+path="res://.godot/imported/K31_Bullet.obj-4a7ae2a7d3b6ba9a7dcd8ce6737ecfb1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/K31_Bullet.obj-4a7ae2a7d3b6ba9a7dcd8ce6737ecfb1.mesh"]
+
+source_file="res://Objects/K31_Bullet.obj"
+dest_files=["res://.godot/imported/K31_Bullet.obj-4a7ae2a7d3b6ba9a7dcd8ce6737ecfb1.mesh", "res://.godot/imported/K31_Bullet.obj-4a7ae2a7d3b6ba9a7dcd8ce6737ecfb1.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

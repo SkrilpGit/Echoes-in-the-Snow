@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbco7gi88sw64"]
+
+[ext_resource type="PackedScene" uid="uid://cdmxekmhnobso" path="res://Scenes/player.tscn" id="2_mmg4v"]
+[ext_resource type="PackedScene" uid="uid://bpxvdujulyilw" path="res://Scenes/world.tscn" id="2_w1hpo"]
+[ext_resource type="PackedScene" uid="uid://bxscx2h36od2t" path="res://Scenes/target.tscn" id="3_auqql"]
+[ext_resource type="PackedScene" uid="uid://clrlpn2f0u0b4" path="res://Scenes/sniper_tower.tscn" id="4_d6xjx"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("2_mmg4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.2084, 245.953)
+
+[node name="World" parent="." instance=ExtResource("2_w1hpo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.65377, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.867271, 0.497837, 0, -0.497837, 0.867271, 0, 5.19787, 3.92064)
+
+[node name="Target" parent="." instance=ExtResource("3_auqql")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.471138, 3.84126, -382.964)
+
+[node name="SniperTower" parent="." instance=ExtResource("4_d6xjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.7389, 13.9851, 257.846)
