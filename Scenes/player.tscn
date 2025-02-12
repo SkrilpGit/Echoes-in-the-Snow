@@ -16,7 +16,7 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("Camera3D")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.239, 0.83, -1.244)
+tracks/0/keys = PackedFloat32Array(0, 1, 0.239, 0, -1.244)
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -39,7 +39,7 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("Camera3D")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.604115, 0.749964, 3.37474, 0.5, 1, 0, 0, 5)
+tracks/0/keys = PackedFloat32Array(0, 1, 0.604, 0, 3.375, 0.5, 1, 0, 0, 5)
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -62,7 +62,7 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("Camera3D")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 5, 0.5, 1, 0.604115, 0.749964, 3.37474)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 5, 0.5, 1, 0.604, 0, 3.375)
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -87,13 +87,12 @@ _data = {
 
 [node name="Player" type="Node3D"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera_pivot", "rig", "spine_ik")]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera_pivot", "rig")]
 script = ExtResource("1_m50le")
 gravity = 19.6
 jump_force = 8.0
 camera_pivot = NodePath("../PlayerCam")
 rig = NodePath("basic_guy_rig")
-spine_ik = NodePath("basic_guy_rig/Armature/Skeleton3D/Spine_IK")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1.19644, 0, 0, 0, 1, 0, 0, 0)
@@ -102,26 +101,28 @@ shape = SubResource("CapsuleShape3D_h6sl2")
 [node name="basic_guy_rig" parent="CharacterBody3D" instance=ExtResource("2_4e32g")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.26079, 0)
 
+[node name="Skeleton3D" parent="CharacterBody3D/basic_guy_rig/Armature" index="0"]
+bones/22/rotation = Quaternion(-0.295252, -0.279948, 0.495237, 0.767591)
+
 [node name="left_hand_main_attach" parent="CharacterBody3D/basic_guy_rig/Armature/Skeleton3D" index="1"]
 transform = Transform3D(-0.462401, -0.886488, 0.0180175, -0.339479, 0.195775, 0.920014, -0.819109, 0.419299, -0.391471, -0.134209, 1.91196, 0.845102)
 
 [node name="Spine_IK" parent="CharacterBody3D/basic_guy_rig/Armature/Skeleton3D" index="2"]
 target_node = NodePath("../../../../../PlayerCam/IK_target")
 
-[node name="PlayerCam" type="Node3D" parent="." node_paths=PackedStringArray("anim_ctrl", "character", "cam", "MODE", "mag", "elev", "wind")]
+[node name="PlayerCam" type="Node3D" parent="." node_paths=PackedStringArray("anim_ctrl", "character", "cam", "HUD")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 script = ExtResource("3_ymm6p")
 anim_ctrl = NodePath("AnimationPlayer")
 character = NodePath("../CharacterBody3D")
 cam = NodePath("Camera3D")
-MODE = NodePath("../CanvasLayer/HUD/Mode")
-mag = NodePath("../CanvasLayer/HUD/Magnitude")
-elev = NodePath("../CanvasLayer/HUD/Elevation")
-wind = NodePath("../CanvasLayer/HUD/Windage")
+HUD = NodePath("../CanvasLayer/HUD")
+offset = Vector3(0, 0.8, 0)
 
 [node name="Camera3D" type="Camera3D" parent="PlayerCam"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.239, 0.83, -1.244)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.604115, 0.749964, 3.37474)
 current = true
-fov = 10.0
+fov = 50.0
 far = 10000.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerCam"]
@@ -132,7 +133,7 @@ libraries = {
 }
 
 [node name="IK_target" type="Node3D" parent="PlayerCam"]
-transform = Transform3D(-0.923879, 0.0226956, 0.382009, 0, 0.99824, -0.0593063, -0.382683, -0.054792, -0.922252, 0, 0.6, 0.05)
+transform = Transform3D(-0.923879, 0.0193611, 0.382193, 0, 0.998719, -0.0505929, -0.382683, -0.0467418, -0.922695, 0, 0, 0)
 
 [node name="DebugTriPrism" type="MeshInstance3D" parent="PlayerCam/IK_target"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -142,6 +143,7 @@ mesh = SubResource("PrismMesh_fxbl7")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("4_a3giv")]
+visible = false
 
 [connection signal="animation_finished" from="PlayerCam/AnimationPlayer" to="PlayerCam" method="_on_animation_finished"]
 

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cewerw7va1jfo"
+path="res://.godot/imported/K31_casing.obj-fe75c098a620438dc758fb2881a77ab8.mesh"
+
+[deps]
+
+files=["res://.godot/imported/K31_casing.obj-fe75c098a620438dc758fb2881a77ab8.mesh"]
+
+source_file="res://Animations/K31_casing.obj"
+dest_files=["res://.godot/imported/K31_casing.obj-fe75c098a620438dc758fb2881a77ab8.mesh", "res://.godot/imported/K31_casing.obj-fe75c098a620438dc758fb2881a77ab8.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

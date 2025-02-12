@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct7t25u0xfe3j"]
+
+[ext_resource type="Texture2D" uid="uid://d2p8f7blrog3r" path="res://Crosshair_Diamond.png" id="1_eyjkr"]
+
+[node name="HUD" type="Node2D"]
+
+[node name="Crosshair" type="Sprite2D" parent="."]
+position = Vector2(576, 320)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_eyjkr")
