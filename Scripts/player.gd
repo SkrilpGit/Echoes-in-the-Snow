@@ -24,7 +24,7 @@ var esc_tog = true
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func _input(event):
+func _input(_event):
 	
 	if Input.is_action_just_pressed("fire"):
 		rig.fire()
@@ -33,12 +33,7 @@ func _input(event):
 	
 	if Input.is_action_just_pressed("aim"):
 		camera_pivot.aim()
-	if Input.is_action_just_pressed("increment"):
-		camera_pivot.increment(true)
-	if Input.is_action_just_pressed("decrement"):
-		camera_pivot.increment(false)
-	if Input.is_action_just_pressed("change_mode"):
-		camera_pivot.change_mode()
+	
 	if Input.is_action_just_pressed("ui_cancel"):
 		if esc_tog:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -71,15 +66,6 @@ func lerp_to_direction(direction,speed,delta):
 	# Update rotation
 	return new_angle
 
-func angle_to_vector2(angle : float):
-	return Vector2(-sin(angle), cos(angle))
-
-func vector2_to_angle(v : Vector2):
-	return atan2(v.x,v.y)
-
-func round_to_dec(num, digit):
-	return round(num * pow(10.0, digit)) / pow(10.0, digit)
-
 func _physics_process(delta):
 	
 	input_dir = Vector2.ZERO
@@ -93,25 +79,36 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_right"):
 		input_dir.x += -1
 	
-	if aiming:
-		#rig.rotation_degrees.y = 180
-		spine_ik.target.basis.x = camera_pivot.basis.y
-		rig.S_IK(true)
-		if input_dir:
-			#var dir = Vector2(input_dir.x,-input_dir.y)
-			var angle = vector2_to_angle(input_dir)
-			var n_angle = angle - camera_pivot.rotation.y
-			input_dir = angle_to_vector2(n_angle)
-			rig.rotation_degrees.y = lerp_to_direction(-input_dir,5,delta)
+	match camera_pivot.state:
+		camera_pivot.states.TRANSITION:
+			var dir = Global.angle_to_vector2(camera_pivot.rotation.y)
+			dir = Vector2(-dir.x,dir.y)
+			rig.rotation_degrees.y = lerp_to_direction(dir,5,delta)
+			if input_dir:
+				var angle = Global.vector2_to_angle(input_dir)
+				var n_angle = angle - camera_pivot.rotation.y
+				input_dir = Global.angle_to_vector2(n_angle)
+		camera_pivot.states.SHOULDER:
+			rig.spine_ik.target.basis.x = camera_pivot.basis.y
+			rig.S_IK(true)
+			if input_dir:
+				#var dir = Vector2(input_dir.x,-input_dir.y)
+				var angle = Global.vector2_to_angle(input_dir)
+				var n_angle = angle - camera_pivot.rotation.y
+				input_dir = Global.angle_to_vector2(n_angle)
+				rig.rotation_degrees.y = lerp_to_direction(-input_dir,5,delta)
+			else:
+				var dir = Global.angle_to_vector2(camera_pivot.rotation.y)
+				dir = Vector2(-dir.x,dir.y)
+				rig.rotation_degrees.y = lerp_to_direction(dir,5,delta)
+		camera_pivot.states.FREE:
+			rig.S_IK(false)
+			if input_dir:
+				var angle = Global.vector2_to_angle(input_dir)
+				var n_angle = angle - camera_pivot.rotation.y
+				input_dir = Global.angle_to_vector2(n_angle)
+				rig.rotation_degrees.y = lerp_to_direction(-input_dir,5,delta)
 	
-	elif !aiming:
-		rig.S_IK(false)
-		if input_dir:
-			var angle = vector2_to_angle(input_dir)
-			var n_angle = angle - camera_pivot.rotation.y
-			input_dir = angle_to_vector2(n_angle)
-			rig.rotation_degrees.y = lerp_to_direction(-input_dir,5,delta)
-
 	input_dir = input_dir.normalized()
 	velocity.x = input_dir.x * move_speed
 	velocity.z = input_dir.y * move_speed
@@ -119,4 +116,4 @@ func _physics_process(delta):
 
 	move_and_slide()
 	if aiming:
-		camera_pivot.position = position
+		camera_pivot.position = position + camera_pivot.offset
