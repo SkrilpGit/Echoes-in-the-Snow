@@ -1,7 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://bl4oqyux076fe"]
+[gd_scene load_steps=19 format=3 uid="uid://bwjdmv22kl2f8"]
 
 [ext_resource type="Script" path="res://Scripts/K31-55.gd" id="1_r7rib"]
-[ext_resource type="PackedScene" uid="uid://df611bg78tbn7" path="res://Scenes/K31_Bullet.tscn" id="2_n4qih"]
+[ext_resource type="PackedScene" uid="uid://b52m2bfvu0qlo" path="res://Scenes/K31_Bullet.tscn" id="2_tssna"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mso7f"]
 
@@ -668,7 +668,7 @@ _data = {
 script = ExtResource("1_r7rib")
 anim_ctrl = NodePath("AnimationPlayer")
 spawn = NodePath("Spawn_Bullet")
-bullet = ExtResource("2_n4qih")
+bullet = ExtResource("2_tssna")
 
 [node name="Armature" type="Node3D" parent="."]
 

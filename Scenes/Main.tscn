@@ -1,23 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbco7gi88sw64"]
+[gd_scene load_steps=5 format=3 uid="uid://cp0wt7345utka"]
 
-[ext_resource type="PackedScene" uid="uid://cdmxekmhnobso" path="res://Scenes/player.tscn" id="2_mmg4v"]
-[ext_resource type="PackedScene" uid="uid://bpxvdujulyilw" path="res://Scenes/world.tscn" id="2_w1hpo"]
-[ext_resource type="PackedScene" uid="uid://bxscx2h36od2t" path="res://Scenes/target.tscn" id="3_auqql"]
-[ext_resource type="PackedScene" uid="uid://clrlpn2f0u0b4" path="res://Scenes/sniper_tower.tscn" id="4_d6xjx"]
+[ext_resource type="PackedScene" uid="uid://x6sfu4gbjdte" path="res://Scenes/player.tscn" id="1_isfex"]
+[ext_resource type="PackedScene" uid="uid://bpxvdujulyilw" path="res://Scenes/world.tscn" id="2_clxtv"]
+[ext_resource type="PackedScene" uid="uid://hd2cm0hk2oc2" path="res://Scenes/target.tscn" id="3_1ic0u"]
+[ext_resource type="PackedScene" uid="uid://clrlpn2f0u0b4" path="res://Scenes/sniper_tower.tscn" id="4_hb3cc"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Player" parent="." instance=ExtResource("2_mmg4v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.2084, 245.953)
+[node name="Player" parent="." instance=ExtResource("1_isfex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.5354, 165.101, 2430.91)
 
-[node name="World" parent="." instance=ExtResource("2_w1hpo")]
+[node name="World" parent="." instance=ExtResource("2_clxtv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.65377, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.867271, 0.497837, 0, -0.497837, 0.867271, 0, 5.19787, 3.92064)
 
-[node name="Target" parent="." instance=ExtResource("3_auqql")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.471138, 3.84126, -382.964)
+[node name="Target" parent="." instance=ExtResource("3_1ic0u")]
+transform = Transform3D(0.955191, 0, 0.295992, 0, 1, 0, -0.295992, 0, 0.955191, -893.009, 113.285, -3161.6)
 
-[node name="SniperTower" parent="." instance=ExtResource("4_d6xjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.7389, 13.9851, 257.846)
+[node name="Target2" parent="." instance=ExtResource("3_1ic0u")]
+transform = Transform3D(0.955191, 0, 0.295992, 0, 1, 0, -0.295992, 0, 0.955191, -62.0886, 78.292, 1174.3)
+
+[node name="Target3" parent="." instance=ExtResource("3_1ic0u")]
+transform = Transform3D(0.955191, 0, 0.295992, 0, 1, 0, -0.295992, 0, 0.955191, 799.394, 52.5547, 408.692)
+
+[node name="SniperTower" parent="." instance=ExtResource("4_hb3cc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.0701, 153.515, 2430.48)
+
+[editable path="World"]
+[editable path="Target2"]
+[editable path="Target3"]
