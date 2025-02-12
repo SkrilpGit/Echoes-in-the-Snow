@@ -12,6 +12,7 @@ data = PackedVector3Array(500, 0.3973, -437.5, 437.5, 0.9415, -437.5, 500, 0.145
 [node name="World" type="StaticBody3D"]
 
 [node name="Terrain" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_3ri1g")
 mesh = ExtResource("2_q07ys")
 

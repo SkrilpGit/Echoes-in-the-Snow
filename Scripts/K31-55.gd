@@ -13,25 +13,6 @@ enum states{
 var state = states.READY
 var anim_queue = []
 
-func _input(event):
-	if Input.is_action_just_pressed("fire") and state == states.READY:
-		if anim_ctrl.get_animation("Idle"):
-			anim_ctrl.play("Fire")
-		elif anim_queue.is_empty():
-			anim_queue.append("Fire")
-		state = states.FIRED
-		#print("bang!")
-	elif Input.is_action_just_released("fire") and state == states.FIRED:
-		if anim_ctrl.current_animation == "":
-			anim_ctrl.play("Chamber_Spent")
-		elif anim_queue.is_empty():
-			anim_queue.append("Chamber_Spent")
-		state = states.CHAMBERING
-		#print("clink! clonk!")
-
-func _process(delta):
-	pass
-
 func spawn_bullet():
 	var instance = bullet.instantiate()
 	#instance.global_position = spawn.global_position
@@ -41,6 +22,22 @@ func spawn_bullet():
 	instance.creator = owner
 	get_tree().get_root().add_child.call_deferred(instance)
 	print("bullet spawned")
+
+func fire():
+	if state == states.READY:
+		if anim_ctrl.get_animation("Idle"):
+			anim_ctrl.play("Fire")
+		elif anim_queue.is_empty():
+			anim_queue.append("Fire")
+		state = states.FIRED
+
+func chamber():
+	if state == states.FIRED:
+		if anim_ctrl.current_animation == "":
+			anim_ctrl.play("Chamber_Spent")
+		elif anim_queue.is_empty():
+			anim_queue.append("Chamber_Spent")
+		state = states.CHAMBERING
 
 func _on_animation_player_animation_finished(anim_name):
 	match anim_name:

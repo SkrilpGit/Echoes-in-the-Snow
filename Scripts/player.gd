@@ -19,24 +19,35 @@ extends CharacterBody3D
 
 var aiming = false
 var input_dir = Vector2.ZERO
+var esc_tog = true
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func S_IK(start):
-	if start:
-		spine_ik.start()
-	else:
-		spine_ik.stop()
-
 func _input(event):
 	
-	
+	if Input.is_action_just_pressed("fire"):
+		rig.fire()
+	elif Input.is_action_just_released("fire"):
+		rig.chamber()
 	
 	if Input.is_action_just_pressed("aim"):
 		camera_pivot.aim()
-	if Input.is_action_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if Input.is_action_just_pressed("increment"):
+		camera_pivot.increment(true)
+	if Input.is_action_just_pressed("decrement"):
+		camera_pivot.increment(false)
+	if Input.is_action_just_pressed("change_mode"):
+		camera_pivot.change_mode()
+	if Input.is_action_just_pressed("ui_cancel"):
+		if esc_tog:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			camera_pivot.input_enabled = false
+			esc_tog = false
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			camera_pivot.input_enabled = true
+			esc_tog = true
 		
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		velocity.y = jump_force
@@ -83,16 +94,21 @@ func _physics_process(delta):
 		input_dir.x += -1
 	
 	if aiming:
-		rig.rotation_degrees.y = 180
+		#rig.rotation_degrees.y = 180
+		spine_ik.target.basis.x = camera_pivot.basis.y
+		rig.S_IK(true)
 		if input_dir:
+			#var dir = Vector2(input_dir.x,-input_dir.y)
 			var angle = vector2_to_angle(input_dir)
-			var n_angle = angle - rotation.y
+			var n_angle = angle - camera_pivot.rotation.y
 			input_dir = angle_to_vector2(n_angle)
+			rig.rotation_degrees.y = lerp_to_direction(-input_dir,5,delta)
 	
-	if !aiming:
+	elif !aiming:
+		rig.S_IK(false)
 		if input_dir:
 			var angle = vector2_to_angle(input_dir)
-			var n_angle = angle - camera_pivot.freecam.rotation.y
+			var n_angle = angle - camera_pivot.rotation.y
 			input_dir = angle_to_vector2(n_angle)
 			rig.rotation_degrees.y = lerp_to_direction(-input_dir,5,delta)
 
@@ -102,3 +118,5 @@ func _physics_process(delta):
 	velocity.y -= gravity * delta
 
 	move_and_slide()
+	if aiming:
+		camera_pivot.position = position
