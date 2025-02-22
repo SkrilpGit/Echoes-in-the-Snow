@@ -154,6 +154,9 @@ transform = Transform3D(-0.462401, -0.886488, 0.0180175, -0.339479, 0.195775, 0.
 [node name="Spine_IK" parent="CharacterBody3D/basic_guy_rig/Armature/Skeleton3D" index="2"]
 target_node = NodePath("../../../../../PlayerCam/IK_target")
 
+[node name="AnimationTree" parent="CharacterBody3D/basic_guy_rig" index="2"]
+"parameters/TimeScale 2/scale" = 1.0
+
 [node name="PlayerCam" type="Node3D" parent="." node_paths=PackedStringArray("anim_ctrl", "character", "cam", "HUD")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 script = ExtResource("3_ymm6p")

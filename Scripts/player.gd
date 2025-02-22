@@ -63,40 +63,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_right"):
 		input_dir.x += -1
 	
-	if input_dir != Vector2.ZERO:
-		rig.move_forward()
-	else:
-		rig.stand_still()
-	
-	match camera_pivot.state:
-		camera_pivot.states.TRANSITION:
-			var dir = Global.angle_to_vector2(camera_pivot.rotation.y)
-			dir = Vector2(-dir.x,dir.y)
-			rig.rotation_degrees.y = Global.lerp_to_direction(rig.rotation_degrees.y,dir,5,delta)
-			if input_dir:
-				var angle = Global.vector2_to_angle(input_dir)
-				var n_angle = angle - camera_pivot.rotation.y
-				input_dir = Global.angle_to_vector2(n_angle)
-		camera_pivot.states.SHOULDER:
-			rig.spine_ik.target.basis.x = camera_pivot.basis.y
-			rig.S_IK(true)
-			if input_dir:
-				#var dir = Vector2(input_dir.x,-input_dir.y)
-				var angle = Global.vector2_to_angle(input_dir)
-				var n_angle = angle - camera_pivot.rotation.y
-				input_dir = Global.angle_to_vector2(n_angle)
-				rig.rotation_degrees.y = Global.lerp_to_direction(rig.rotation_degrees.y,-input_dir,5,delta)
-			else:
-				var dir = Global.angle_to_vector2(camera_pivot.rotation.y)
-				dir = Vector2(-dir.x,dir.y)
-				rig.rotation_degrees.y = Global.lerp_to_direction(rig.rotation_degrees.y,dir,5,delta)
-		camera_pivot.states.FREE:
-			rig.S_IK(false)
-			if input_dir:
-				var angle = Global.vector2_to_angle(input_dir)
-				var n_angle = angle - camera_pivot.rotation.y
-				input_dir = Global.angle_to_vector2(n_angle)
-				rig.rotation_degrees.y = Global.lerp_to_direction(rig.rotation_degrees.y,-input_dir,5,delta)
+	camera_pivot_state(delta)
 	
 	input_dir = input_dir.normalized()
 	body.velocity.x = input_dir.x * move_speed
@@ -106,3 +73,68 @@ func _physics_process(delta):
 	body.move_and_slide()
 	if aiming:
 		camera_pivot.position = body.position + camera_pivot.offset
+
+func camera_pivot_state(delta):
+	var my_rot = rig.rotation_degrees.y
+	match camera_pivot.state:
+		
+		camera_pivot.states.TRANSITION:
+			var dir = Global.angle_to_vector2(camera_pivot.rotation.y)
+			dir = Vector2(-dir.x,dir.y)
+			rig.rotation_degrees.y = Global.lerp_to_direction(my_rot,dir,5,delta)
+			if input_dir:
+				var angle = Global.vector2_to_angle(input_dir)
+				var n_angle = angle - camera_pivot.rotation.y
+				input_dir = Global.angle_to_vector2(n_angle)
+		
+		camera_pivot.states.SHOULDER:
+			rig.spine_ik.target.basis.x = camera_pivot.basis.y
+			rig.S_IK(true)
+			if input_dir:
+				set_move_animation(input_dir)
+				var angle = Global.vector2_to_angle(input_dir)
+				var n_angle = angle - camera_pivot.rotation.y
+				input_dir = Global.angle_to_vector2(n_angle)
+				var dir = Global.angle_to_vector2(camera_pivot.rotation.y)
+				dir = Vector2(-dir.x,dir.y)
+				rig.rotation_degrees.y = Global.lerp_to_direction(my_rot,dir,5,delta)
+			else:
+				rig.stand_still()
+				var dir = Global.angle_to_vector2(camera_pivot.rotation.y)
+				dir = Vector2(-dir.x,dir.y)
+				rig.rotation_degrees.y = Global.lerp_to_direction(my_rot,dir,5,delta)
+		
+		camera_pivot.states.SCOPED:
+			rig.spine_ik.target.basis.x = camera_pivot.basis.y
+			rig.S_IK(true)
+			if input_dir:
+				var angle = Global.vector2_to_angle(input_dir)
+				var n_angle = angle - camera_pivot.rotation.y
+				input_dir = Global.angle_to_vector2(n_angle)
+				rig.rotation_degrees.y = Global.lerp_to_direction(my_rot,-input_dir,5,delta)
+			else:
+				var dir = Global.angle_to_vector2(camera_pivot.rotation.y)
+				dir = Vector2(-dir.x,dir.y)
+				rig.rotation_degrees.y = Global.lerp_to_direction(my_rot,dir,5,delta)
+		
+		camera_pivot.states.FREE:
+			rig.S_IK(false)
+			if input_dir:
+				var angle = Global.vector2_to_angle(input_dir)
+				var n_angle = angle - camera_pivot.rotation.y
+				input_dir = Global.angle_to_vector2(n_angle)
+				rig.rotation_degrees.y = Global.lerp_to_direction(my_rot,-input_dir,5,delta)
+				rig.move_forward()
+			else:
+				rig.stand_still()
+
+func set_move_animation(dir):
+	print(dir)
+	if dir == Vector2(0,-1):
+		rig.move_forward()
+	elif dir == Vector2(0,1):
+		rig.move_backward()
+	elif dir.x < 0:
+		rig.move_right()
+	elif dir.x > 0:
+		rig.move_left()
