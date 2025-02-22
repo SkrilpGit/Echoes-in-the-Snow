@@ -1,14 +1,16 @@
-extends CharacterBody3D
+extends Node3D
 
 # Movement speed
 @export var move_speed = 5.0
-@export var rotate_speed = 3.0
 
 # Gravity
 @export var gravity = 9.8
 
 # Jump force
 @export var jump_force = 10.0
+
+# Character Body
+@onready var body = $CharacterBody3D
 
 # Camera Pivot
 @export var camera_pivot: Node3D
@@ -47,8 +49,8 @@ func _input(_event):
 			camera_pivot.input_enabled = true
 			esc_tog = true
 		
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
-		velocity.y = jump_force
+	if body.is_on_floor() and Input.is_action_just_pressed("jump"):
+		body.velocity.y = jump_force
 
 
 func lerp_to_direction(direction,speed,delta):
@@ -113,10 +115,10 @@ func _physics_process(delta):
 				rig.rotation_degrees.y = lerp_to_direction(-input_dir,5,delta)
 	
 	input_dir = input_dir.normalized()
-	velocity.x = input_dir.x * move_speed
-	velocity.z = input_dir.y * move_speed
-	velocity.y -= gravity * delta
+	body.velocity.x = input_dir.x * move_speed
+	body.velocity.z = input_dir.y * move_speed
+	body.velocity.y -= gravity * delta
 
-	move_and_slide()
+	body.move_and_slide()
 	if aiming:
-		camera_pivot.position = position + camera_pivot.offset
+		camera_pivot.position = body.position + camera_pivot.offset

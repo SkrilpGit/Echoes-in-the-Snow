@@ -3,7 +3,7 @@ extends Node3D
 var anim_ready = true
 
 @export var anim_ctrl : AnimationPlayer
-@export var character : CharacterBody3D
+@export var character : Node3D
 @export var cam : Camera3D
 @export var HUD : Node2D
 @export var MOUSE_SENSE = 0.001
@@ -50,10 +50,10 @@ func _process(delta):
 	mouse_sensitivity = get_viewport().get_camera_3d().fov * MOUSE_SENSE
 	match state:
 		states.FREE:
-			var tarPos = character.position + offset
+			var tarPos = character.body.position + offset
 			position = lerp(position,tarPos,5*delta)
 		states.TRANSITION:
-			var tarPos = character.position + offset
+			var tarPos = character.body.position + offset
 			position = lerp(position,tarPos,5*delta)
 
 func aim():

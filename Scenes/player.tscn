@@ -85,14 +85,14 @@ _data = {
 
 [sub_resource type="PrismMesh" id="PrismMesh_fxbl7"]
 
-[node name="Player" type="Node3D"]
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera_pivot", "rig")]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("camera_pivot", "rig", "spine_ik")]
 script = ExtResource("1_m50le")
-gravity = 19.6
-jump_force = 8.0
-camera_pivot = NodePath("../PlayerCam")
-rig = NodePath("basic_guy_rig")
+jump_force = 5.0
+camera_pivot = NodePath("PlayerCam")
+rig = NodePath("CharacterBody3D/basic_guy_rig")
+spine_ik = NodePath("CharacterBody3D/basic_guy_rig/Armature/Skeleton3D/Spine_IK")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1.19644, 0, 0, 0, 1, 0, 0, 0)
@@ -161,7 +161,7 @@ target_node = NodePath("../../../../../PlayerCam/IK_target")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 script = ExtResource("3_ymm6p")
 anim_ctrl = NodePath("AnimationPlayer")
-character = NodePath("../CharacterBody3D")
+character = NodePath("..")
 cam = NodePath("Camera3D")
 HUD = NodePath("../CanvasLayer/HUD")
 offset = Vector3(0, 0.8, 0)

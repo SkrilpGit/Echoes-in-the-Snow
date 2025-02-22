@@ -26,7 +26,7 @@ func _ready():
 	#find the node that controls this characters behaviour
 	# k31-55 -> bone attach -> skeleton -> armature -> rig -> body3D -> character
 	#e.g. Player
-	character = get_node("../../../../..")
+	character = get_node("../../../../../..")
 	print(character)
 	character.fire_pressed.connect(self.fire)
 	character.fire_released.connect(self.chamber)
