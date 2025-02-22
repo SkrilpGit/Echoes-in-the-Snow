@@ -52,25 +52,6 @@ func _input(_event):
 	if body.is_on_floor() and Input.is_action_just_pressed("jump"):
 		body.velocity.y = jump_force
 
-
-func lerp_to_direction(direction,speed,delta):
-	var angle = rad_to_deg(atan2(-direction.x, -direction.y))
-	var my_rot = rig.rotation_degrees.y
-	# Wrap angles to [0, 360] for easier quadrant checking
-	var wrapped_angle = int(angle + 360) % 360
-	var wrapped_my_rot = int(my_rot + 360) % 360
-	# Calculate shortest path
-	var delta_angle = wrapped_angle - wrapped_my_rot
-	# Handle quadrant crossing (wrap delta_angle to [-180, 180])
-	if delta_angle > 180:
-		delta_angle -= 360
-	elif delta_angle < -180:
-		delta_angle += 360
-	# Smoothly interpolate using lerp
-	var new_angle = my_rot + delta_angle * (speed * delta)
-	# Update rotation
-	return new_angle
-
 func _physics_process(delta):
 	
 	input_dir = Vector2.ZERO
@@ -88,7 +69,7 @@ func _physics_process(delta):
 		camera_pivot.states.TRANSITION:
 			var dir = Global.angle_to_vector2(camera_pivot.rotation.y)
 			dir = Vector2(-dir.x,dir.y)
-			rig.rotation_degrees.y = lerp_to_direction(dir,5,delta)
+			rig.rotation_degrees.y = Global.lerp_to_direction(rig.rotation_degrees.y,dir,5,delta)
 			if input_dir:
 				var angle = Global.vector2_to_angle(input_dir)
 				var n_angle = angle - camera_pivot.rotation.y
@@ -101,18 +82,18 @@ func _physics_process(delta):
 				var angle = Global.vector2_to_angle(input_dir)
 				var n_angle = angle - camera_pivot.rotation.y
 				input_dir = Global.angle_to_vector2(n_angle)
-				rig.rotation_degrees.y = lerp_to_direction(-input_dir,5,delta)
+				rig.rotation_degrees.y = Global.lerp_to_direction(rig.rotation_degrees.y,-input_dir,5,delta)
 			else:
 				var dir = Global.angle_to_vector2(camera_pivot.rotation.y)
 				dir = Vector2(-dir.x,dir.y)
-				rig.rotation_degrees.y = lerp_to_direction(dir,5,delta)
+				rig.rotation_degrees.y = Global.lerp_to_direction(rig.rotation_degrees.y,dir,5,delta)
 		camera_pivot.states.FREE:
 			rig.S_IK(false)
 			if input_dir:
 				var angle = Global.vector2_to_angle(input_dir)
 				var n_angle = angle - camera_pivot.rotation.y
 				input_dir = Global.angle_to_vector2(n_angle)
-				rig.rotation_degrees.y = lerp_to_direction(-input_dir,5,delta)
+				rig.rotation_degrees.y = Global.lerp_to_direction(rig.rotation_degrees.y,-input_dir,5,delta)
 	
 	input_dir = input_dir.normalized()
 	body.velocity.x = input_dir.x * move_speed
