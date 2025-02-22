@@ -3,13 +3,13 @@
 importer="animation_library"
 importer_version=1
 type="AnimationLibrary"
-uid="uid://bl0whmbx0prq0"
-path="res://.godot/imported/K31_anims.glb-9fecff64c960e5634fb4d7de8993ec67.res"
+uid="uid://baa0a215lqu2j"
+path="res://.godot/imported/movement_anims.glb-49cfe3bda77d7bcd4b2271dd94ec0c58.res"
 
 [deps]
 
-source_file="res://Animations/K31_anims.glb"
-dest_files=["res://.godot/imported/K31_anims.glb-9fecff64c960e5634fb4d7de8993ec67.res"]
+source_file="res://Animations/basic_rig/movement_anims.glb"
+dest_files=["res://.godot/imported/movement_anims.glb-49cfe3bda77d7bcd4b2271dd94ec0c58.res"]
 
 [params]
 

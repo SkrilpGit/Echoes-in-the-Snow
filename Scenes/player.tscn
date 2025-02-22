@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://x6sfu4gbjdte"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_m50le"]
-[ext_resource type="PackedScene" uid="uid://b62lwayawuhaq" path="res://Scenes/basic_guy.tscn" id="2_4e32g"]
+[ext_resource type="PackedScene" uid="uid://dptoso0im7i1x" path="res://Scenes/basic_guy.tscn" id="2_4e32g"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="3_ymm6p"]
 [ext_resource type="PackedScene" uid="uid://ct7t25u0xfe3j" path="res://Scenes/hud.tscn" id="4_a3giv"]
 
