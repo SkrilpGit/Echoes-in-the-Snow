@@ -21,15 +21,18 @@ var aiming = false
 var input_dir = Vector2.ZERO
 var esc_tog = true
 
+signal fire_pressed()
+signal fire_released()
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(_event):
 	
 	if Input.is_action_just_pressed("fire"):
-		rig.fire()
+		fire_pressed.emit()
 	elif Input.is_action_just_released("fire"):
-		rig.chamber()
+		fire_released.emit()
 	
 	if Input.is_action_just_pressed("aim"):
 		camera_pivot.aim()

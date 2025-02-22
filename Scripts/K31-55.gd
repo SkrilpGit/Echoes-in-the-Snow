@@ -12,6 +12,7 @@ extends Node3D
 @onready var c_spawn = $Spawn_Casing
 
 @onready var rig_anim = AnimationPlayer.new()
+var character
 
 enum states{
 	FIRED,
@@ -22,14 +23,23 @@ var state = states.READY
 var anim_queue = []
 
 func _ready():
+	#find the node that controls this characters behaviour
+	# k31-55 -> bone attach -> skeleton -> armature -> rig -> body3D -> character
+	#e.g. Player
+	character = get_node("../../../../..")
+	print(character)
+	character.fire_pressed.connect(self.fire)
+	character.fire_released.connect(self.chamber)
+	
+	
 	rig_anim.name = "RigPlayer"
 	add_child(rig_anim)
 	# find the node that is 4 parents above me;
 	# k31-55 -> bone attach -> skeleton -> armature -> rig
 	rig_anim.root_node = get_node("../../../..").get_path()
 	rig_anim.add_animation_library("K31_anims",rig_anim_lib)
-	print(rig_anim.get_animation_list())
-	print(get_node(rig_anim.root_node))
+	#print(rig_anim.get_animation_list())
+	#print(get_node(rig_anim.root_node))
 	rig_anim.speed_scale = anim_ctrl.speed_scale
 
 func spawn_bullet():

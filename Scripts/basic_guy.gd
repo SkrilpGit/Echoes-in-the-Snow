@@ -21,13 +21,5 @@ func S_IK(start):
 	else:
 		spine_ik.stop()
 
-func fire():
-	if equipped.has_method("fire"):
-		equipped.fire()
-
-func chamber():
-	if equipped.has_method("chamber"):
-		equipped.chamber()
-
 func _on_animation_finished(_anim_name):
 	pass 
