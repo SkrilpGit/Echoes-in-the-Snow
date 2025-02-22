@@ -684,10 +684,10 @@ _data = {
 "Idle": SubResource("Animation_3yhmu")
 }
 
-[node name="K31-55" type="Node3D" node_paths=PackedStringArray("anim_ctrl", "rig_anim")]
+[node name="K31-55" type="Node3D" node_paths=PackedStringArray("anim_ctrl")]
 script = ExtResource("1_r7rib")
-anim_ctrl = NodePath("AnimationPlayer")
-rig_anim = NodePath("RigPlayer")
+anim_ctrl = NodePath("GunPlayer")
+rig_anim_lib = ExtResource("4_x6te8")
 bullet = ExtResource("2_tssna")
 casing = ExtResource("3_qee8b")
 
@@ -761,13 +761,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 11.3)
 [node name="Spawn_Casing" type="Node3D" parent="."]
 transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -0.414914, 0.860259, 0.169793)
 
-[node name="RigPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("")
-libraries = {
-"K31_anims": ExtResource("4_x6te8")
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="GunPlayer" type="AnimationPlayer" parent="."]
 speed_scale = 3.0
 libraries = {
 "": SubResource("AnimationLibrary_fsmcm")
@@ -816,6 +810,6 @@ offset_bottom = 119.0
 [node name="Crosshair" type="Sprite2D" parent="Scope/Scope_HUD"]
 texture = ExtResource("5_tltgc")
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="GunPlayer" to="." method="_on_animation_player_animation_finished"]
 
 [editable path="Scope/Scope_HUD"]

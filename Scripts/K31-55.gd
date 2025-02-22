@@ -1,13 +1,18 @@
 extends Node3D
 
 @export var anim_ctrl = AnimationPlayer.new()
-@export var rig_anim = AnimationPlayer.new()
+@export var rig_anim_lib = AnimationLibrary
 
 @export var bullet: PackedScene
 @export var casing : PackedScene
 
+@export var node : Node3D
+
 @onready var b_spawn = $Spawn_Bullet
 @onready var c_spawn = $Spawn_Casing
+
+@onready var rig_anim = AnimationPlayer.new()
+
 enum states{
 	FIRED,
 	CHAMBERING,
@@ -17,7 +22,14 @@ var state = states.READY
 var anim_queue = []
 
 func _ready():
-	print(rig_anim)
+	rig_anim.name = "RigPlayer"
+	add_child(rig_anim)
+	# find the node that is 4 parents above me;
+	# k31-55 -> bone attach -> skeleton -> armature -> rig
+	rig_anim.root_node = get_node("../../../..").get_path()
+	rig_anim.add_animation_library("K31_anims",rig_anim_lib)
+	print(rig_anim.get_animation_list())
+	print(get_node(rig_anim.root_node))
 	rig_anim.speed_scale = anim_ctrl.speed_scale
 
 func spawn_bullet():
