@@ -42,6 +42,11 @@ func _ready():
 	#print(get_node(rig_anim.root_node))
 	rig_anim.speed_scale = anim_ctrl.speed_scale
 
+func _process(delta):
+	if anim_ctrl.current_animation == "Idle":
+		anim_ctrl.play("Idle")
+		rig_anim.play("K31_anims/Aiming_Upper")
+
 func spawn_bullet():
 	var instance = bullet.instantiate()
 	#instance.global_position = b_spawn.global_position

@@ -63,6 +63,11 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_right"):
 		input_dir.x += -1
 	
+	if input_dir != Vector2.ZERO:
+		rig.move_forward()
+	else:
+		rig.stand_still()
+	
 	match camera_pivot.state:
 		camera_pivot.states.TRANSITION:
 			var dir = Global.angle_to_vector2(camera_pivot.rotation.y)

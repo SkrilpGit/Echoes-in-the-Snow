@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var anim_ctrl = AnimationPlayer
+@export var anim_ctrl = AnimationPlayer.new()
 @export var spine_ik = SkeletonIK3D.new()
 @export var left_hand : BoneAttachment3D
 @export var right_hand : BoneAttachment3D
@@ -20,6 +20,13 @@ func S_IK(start):
 		spine_ik.start()
 	else:
 		spine_ik.stop()
+
+func move_forward():
+	if anim_ctrl.current_animation != "movement_anims/move_forward_standing":
+		anim_ctrl.play("movement_anims/move_forward_standing")
+
+func stand_still():
+	anim_ctrl.play("movement_anims/idle_standing")
 
 func _on_animation_finished(_anim_name):
 	pass 
