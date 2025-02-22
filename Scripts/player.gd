@@ -17,8 +17,6 @@ extends Node3D
 
 @export var rig : Node3D
 
-@export var spine_ik: SkeletonIK3D
-
 var aiming = false
 var input_dir = Vector2.ZERO
 var esc_tog = true

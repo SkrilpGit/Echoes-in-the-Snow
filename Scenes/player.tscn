@@ -85,12 +85,11 @@ _data = {
 
 [sub_resource type="PrismMesh" id="PrismMesh_fxbl7"]
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("camera_pivot", "rig", "spine_ik")]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("camera_pivot", "rig")]
 script = ExtResource("1_m50le")
 jump_force = 5.0
 camera_pivot = NodePath("PlayerCam")
 rig = NodePath("CharacterBody3D/basic_guy_rig")
-spine_ik = NodePath("CharacterBody3D/basic_guy_rig/Armature/Skeleton3D/Spine_IK")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 
