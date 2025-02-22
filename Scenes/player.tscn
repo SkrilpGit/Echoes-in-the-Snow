@@ -102,60 +102,12 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.
 
 [node name="Skeleton3D" parent="CharacterBody3D/basic_guy_rig/Armature" index="0"]
 bones/2/rotation = Quaternion(-7.17878e-09, -0.0984797, 1.43491e-09, 0.995139)
-bones/3/rotation = Quaternion(7.60203e-09, -0.0984797, 5.71167e-09, 0.995139)
-bones/4/rotation = Quaternion(0.266345, -0.049959, 0.236011, 0.9332)
-bones/5/rotation = Quaternion(9.64408e-09, 0.259684, -2.6039e-08, 0.965694)
-bones/7/rotation = Quaternion(0.52021, -0.369971, -0.42792, 0.639834)
-bones/8/rotation = Quaternion(0.205105, 1.12518e-08, -1.29764e-08, 0.97874)
-bones/9/rotation = Quaternion(0.105432, -0.0806126, -0.307754, 0.942164)
-bones/10/rotation = Quaternion(0.0164422, 0.828869, 0.195404, 0.52395)
-bones/11/rotation = Quaternion(-0.379967, -0.421991, 0.13096, 0.812649)
-bones/12/rotation = Quaternion(0.127787, 0.00136644, -0.131793, 0.983005)
-bones/13/rotation = Quaternion(-0.0787591, 0.0295567, -0.130854, 0.987826)
-bones/14/rotation = Quaternion(0.482358, -0.404327, 0.164819, 0.759398)
-bones/15/rotation = Quaternion(0.210746, -0.00165291, -0.0674461, 0.97521)
-bones/16/rotation = Quaternion(0.470701, -0.128183, 0.378365, 0.78667)
-bones/17/rotation = Quaternion(-0.172538, -0.215046, -0.236499, 0.931694)
-bones/18/rotation = Quaternion(0.17693, 0.01321, -0.253491, 0.950928)
-bones/20/rotation = Quaternion(0.235192, 0.145746, 0.537962, 0.796266)
-bones/21/rotation = Quaternion(0.899602, -4.23519e-09, 7.52022e-08, 0.436711)
-bones/22/rotation = Quaternion(-0.21068, -0.318678, 0.457264, 0.803099)
-bones/23/rotation = Quaternion(-0.195102, -0.744173, -0.499868, 0.397836)
-bones/24/rotation = Quaternion(0.39887, 0.0344476, -0.409861, 0.819591)
-bones/25/rotation = Quaternion(0.2425, -0.00270275, -0.256403, 0.935652)
-bones/26/position = Vector3(0.0138106, 0.117342, -0.0114275)
-bones/26/rotation = Quaternion(-0.156674, 0.0326425, -0.168422, 0.972637)
-bones/27/rotation = Quaternion(0.0350231, 0.732611, 0.422363, 0.532601)
-bones/28/rotation = Quaternion(0.0978617, 0.00562212, -0.0752242, 0.992337)
-bones/29/position = Vector3(-0.0357086, 0.12627, 0.00176742)
-bones/29/rotation = Quaternion(0.562307, 0.178403, 0.284852, 0.755542)
-bones/30/rotation = Quaternion(0.401583, -6.15539e-09, -0.120867, 0.907812)
-bones/31/rotation = Quaternion(0.214657, 3.15362e-08, -0.0646068, 0.97455)
-bones/40/position = Vector3(-0.06059, 0.623371, 1.64501)
-bones/43/position = Vector3(0.134207, 0.845093, 1.91196)
-bones/43/rotation = Quaternion(0.17542, 0.0960257, -0.509489, 0.836916)
-bones/44/position = Vector3(-0.119794, 0.101576, -0.0169558)
-bones/45/position = Vector3(-0.117415, 0.155922, 0.0527166)
-bones/46/position = Vector3(-0.0622516, 0.188959, 0.0488725)
-bones/47/position = Vector3(0.0102271, 0.15709, 0.0757681)
-bones/49/position = Vector3(0.440762, 0.0259258, 1.36035)
-bones/49/rotation = Quaternion(0.707107, 0, 0.707107, 0)
-bones/50/position = Vector3(0.328108, 0.284663, 1.8773)
-bones/50/rotation = Quaternion(-0.11742, 0.697289, -0.11742, -0.697289)
-bones/52/position = Vector3(0.026542, 0.119596, 0.0850344)
-bones/53/position = Vector3(0.0196589, 0.217307, 0.025723)
-bones/54/position = Vector3(-0.00141157, 0.104221, 0.0929846)
-bones/55/position = Vector3(6.40455e-07, -0.00168116, 0.0179196)
-bones/59/rotation = Quaternion(0.138595, 0.693391, 0.693391, 0.138594)
 
 [node name="left_hand_main_attach" parent="CharacterBody3D/basic_guy_rig/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.462401, -0.886488, 0.0180175, -0.339479, 0.195775, 0.920014, -0.819109, 0.419299, -0.391471, -0.134209, 1.91196, 0.845102)
+transform = Transform3D(-6.86981e-07, 0.994157, 0.107943, -1, -6.59186e-07, 2.35324e-08, -1.38805e-08, -0.107943, 0.994157, 1.02398, 1.90105, -0.111181)
 
 [node name="Spine_IK" parent="CharacterBody3D/basic_guy_rig/Armature/Skeleton3D" index="2"]
 target_node = NodePath("../../../../../PlayerCam/IK_target")
-
-[node name="AnimationTree" parent="CharacterBody3D/basic_guy_rig" index="2"]
-"parameters/TimeScale 2/scale" = 1.0
 
 [node name="PlayerCam" type="Node3D" parent="." node_paths=PackedStringArray("anim_ctrl", "character", "cam", "HUD")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)

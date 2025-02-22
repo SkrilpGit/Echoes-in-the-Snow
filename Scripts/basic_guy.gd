@@ -40,10 +40,9 @@ func move_right():
 		anim_ctrl.speed_scale = anim_speed
 
 func move_left():
-	if anim_ctrl.current_animation != "movement_anims/move_right_standing":
-		anim_ctrl.play("movement_anims/move_right_standing")
-		anim_ctrl.seek(anim_ctrl.current_animation_length, true)
-		anim_ctrl.speed_scale = -anim_speed
+	if anim_ctrl.current_animation != "movement_anims/move_left_standing":
+		anim_ctrl.play("movement_anims/move_left_standing")
+		anim_ctrl.speed_scale = anim_speed
 
 func stand_still():
 	anim_ctrl.play("movement_anims/idle_standing")
