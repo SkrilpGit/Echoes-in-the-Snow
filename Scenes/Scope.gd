@@ -1,7 +1,7 @@
 extends Camera3D
 
 @export var zoom_max = 10
-@export var zoom_min = 0.1
+@export var zoom_min = 1
 @export var zoom_step = 0.5
 
 @export var HUD : Node2D

@@ -18,6 +18,7 @@ var anim_queue = []
 
 func _ready():
 	print(rig_anim)
+	rig_anim.speed_scale = anim_ctrl.speed_scale
 
 func spawn_bullet():
 	var instance = bullet.instantiate()
