@@ -3,19 +3,16 @@ extends Node3D
 var anim_ready = true
 
 @export var anim_ctrl : AnimationPlayer
-@export var character : Node3D
+@export var char : Node3D
 @export var cam : Camera3D
 @export var HUD : Node2D
 @export var MOUSE_SENSE = 0.001
 var mouse_sensitivity = 0.1
 
-var zoom_max = 75
-var zoom_min = 0.1
-@export var zoom_step = 0.5
-
 @export var offset = Vector3.ZERO
 
 var gun = null
+var CamStates = null
 
 enum states{
 	FREE,
@@ -23,12 +20,6 @@ enum states{
 	SHOULDER,
 	SCOPED
 }
-enum mode{
-	ELEVATION,
-	WINDAGE,
-	MAGNIFICATION
-}
-var scope_mode = mode.MAGNIFICATION
 
 var state = states.FREE
 
@@ -42,7 +33,8 @@ func _input(event):
 		rotation_degrees = cam_rot
 
 func _ready():
-	gun = character.rig.equipped
+	gun = char.equipped
+	CamStates = char.find_child("CameraStates")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -50,15 +42,17 @@ func _process(delta):
 	mouse_sensitivity = get_viewport().get_camera_3d().fov * MOUSE_SENSE
 	match state:
 		states.FREE:
-			var tarPos = character.body.position + offset
+			var tarPos = char.body.position + offset
 			position = lerp(position,tarPos,5*delta)
 		states.TRANSITION:
-			var tarPos = character.body.position + offset
+			var tarPos = char.body.position + offset
 			position = lerp(position,tarPos,5*delta)
 
 func aim():
 	if anim_ready:
 		anim_ready = false
+		CamStates.change_state()
+		#print(CamStates.state)
 		match state:
 			states.FREE:
 				state = states.TRANSITION
@@ -86,11 +80,11 @@ func _on_animation_finished(anim_name):
 	cam.rotation = Vector3.ZERO
 	match anim_name:
 		"Shoulder":
-			character.aiming = true
+			char.aiming = true
 			gun.aiming(true)
 			state = states.SHOULDER
 			HUD.visible = true
 		"ADS":
 			anim_ready = true
 		"Reset":
-			character.aiming = false
+			char.aiming = false

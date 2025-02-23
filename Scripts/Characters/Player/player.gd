@@ -24,13 +24,10 @@ var esc_tog = true
 signal fire_pressed()
 signal fire_released()
 
-enum anim_states {
-	FREE,
-	TRANSITION,
-	SHOULDER,
-	SCOPED
-}
-var anim_state = anim_states.FREE
+@onready var CamStates = $CameraStates
+@onready var MovStates = $MovementStates
+
+var equipped : Node3D
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -84,9 +81,9 @@ func _physics_process(delta):
 
 func camera_pivot_state(delta):
 	var my_rot = rig.rotation_degrees.y
-	match camera_pivot.state:
+	match CamStates.states.get(CamStates.state):
 		
-		camera_pivot.states.TRANSITION:
+		"TRANSITION":
 			var dir = Global.angle_to_vector2(camera_pivot.rotation.y)
 			dir = Vector2(-dir.x,dir.y)
 			rig.rotation_degrees.y = Global.lerp_to_direction(my_rot,dir,5,delta)
@@ -95,7 +92,7 @@ func camera_pivot_state(delta):
 				var n_angle = angle - camera_pivot.rotation.y
 				input_dir = Global.angle_to_vector2(n_angle)
 		
-		camera_pivot.states.SHOULDER:
+		"SHOULDER":
 			rig.spine_ik.target.basis.x = camera_pivot.basis.y
 			rig.S_IK(true)
 			if input_dir:
@@ -112,7 +109,7 @@ func camera_pivot_state(delta):
 				dir = Vector2(-dir.x,dir.y)
 				rig.rotation_degrees.y = Global.lerp_to_direction(my_rot,dir,5,delta)
 		
-		camera_pivot.states.SCOPED:
+		"SCOPED":
 			rig.spine_ik.target.basis.x = camera_pivot.basis.y
 			rig.S_IK(true)
 			if input_dir:
@@ -125,7 +122,7 @@ func camera_pivot_state(delta):
 				dir = Vector2(-dir.x,dir.y)
 				rig.rotation_degrees.y = Global.lerp_to_direction(my_rot,dir,5,delta)
 		
-		camera_pivot.states.FREE:
+		"FREE":
 			rig.S_IK(false)
 			if input_dir:
 				var angle = Global.vector2_to_angle(input_dir)

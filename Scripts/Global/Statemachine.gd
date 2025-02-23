@@ -6,20 +6,7 @@ var previous_state = null
 var states = {}
 @onready var parent = get_parent()
 
-func _physics_process(_delta):
-	if state != null:
-		_state_logic(state)
-		var transition = _get_transition(state)
-		if transition != null:
-			set_state(transition)
-			
 func _state_logic(_delta):
-	pass
-
-func get_state():
-	return state
-
-func _get_transition(_delta):
 	pass
 
 func set_state(new_state):

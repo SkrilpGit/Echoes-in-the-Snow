@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c4d62iuf56ex7"]
+[gd_scene load_steps=13 format=3 uid="uid://c4d62iuf56ex7"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player.gd" id="1_j6rlq"]
 [ext_resource type="PackedScene" uid="uid://cheuyvfckuj04" path="res://Scenes/basic_guy.tscn" id="2_4e32g"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Camera.gd" id="3_4wfwy"]
 [ext_resource type="PackedScene" uid="uid://ct7t25u0xfe3j" path="res://Scenes/hud.tscn" id="4_a3giv"]
-[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerSM.gd" id="5_ha55j"]
+[ext_resource type="Script" path="res://Scenes/CameraStates.gd" id="5_6h33b"]
+[ext_resource type="Script" path="res://Scenes/MovementStates.gd" id="6_cws37"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h6sl2"]
 
@@ -110,11 +111,11 @@ transform = Transform3D(0.00760795, 0.441424, -0.897266, -0.999957, 0.00813896, 
 [node name="Spine_IK" parent="CharacterBody3D/basic_guy_rig/Armature/Skeleton3D" index="2"]
 target_node = NodePath("../../../../../PlayerCam/IK_target")
 
-[node name="PlayerCam" type="Node3D" parent="." node_paths=PackedStringArray("anim_ctrl", "character", "cam", "HUD")]
+[node name="PlayerCam" type="Node3D" parent="." node_paths=PackedStringArray("anim_ctrl", "char", "cam", "HUD")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 script = ExtResource("3_4wfwy")
 anim_ctrl = NodePath("AnimationPlayer")
-character = NodePath("..")
+char = NodePath("..")
 cam = NodePath("Camera3D")
 HUD = NodePath("../CanvasLayer/HUD")
 offset = Vector3(0, 0.8, 0)
@@ -145,8 +146,11 @@ mesh = SubResource("PrismMesh_fxbl7")
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("4_a3giv")]
 visible = false
 
-[node name="PlayerStates" type="Node" parent="."]
-script = ExtResource("5_ha55j")
+[node name="CameraStates" type="Node" parent="."]
+script = ExtResource("5_6h33b")
+
+[node name="MovementStates" type="Node" parent="."]
+script = ExtResource("6_cws37")
 
 [connection signal="animation_finished" from="PlayerCam/AnimationPlayer" to="PlayerCam" method="_on_animation_finished"]
 

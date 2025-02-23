@@ -1,15 +1,18 @@
 extends StateMachine
 
-#from StateMachine
+#FROM PARENT
 #var state = null
 #var previous_state = null
 #var states = {}
 #@onready var parent = get_parent()
 
-func _state_logic(_delta):
-	pass
+func _ready():
+	add_state("FREE")
+	add_state("TRANSITION")
+	add_state("SHOULDER")
+	add_state("SCOPE")
 
-func _get_transition(_delta):
+func _state_logic(_delta):
 	pass
 
 func _exit_state(_previous_state, _new_state):
@@ -17,3 +20,6 @@ func _exit_state(_previous_state, _new_state):
 
 func _enter_state(_new_state, _previous_state):
 	pass
+
+func add_state(state_name):
+	states[state_name] = states.size()

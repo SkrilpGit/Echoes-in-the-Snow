@@ -7,15 +7,18 @@ extends Node3D
 
 @export var anim_speed : float
 
-var equipped : Node3D
-
 var anim_queue = []
 
+var char = Node3D
+
 func _ready():
+	
+	char = get_node("../..")
+	
 	if left_hand.get_child_count() > 0:
-		equipped = left_hand.get_children()[0]
+		char.equipped = left_hand.get_children()[0]
 	elif right_hand.get_child_count() > 0:
-		equipped = right_hand.get_children()[0]
+		char.equipped = right_hand.get_children()[0]
 
 func S_IK(start):
 	if start:
