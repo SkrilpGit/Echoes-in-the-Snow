@@ -15,7 +15,7 @@ var zoom_min = 0.1
 
 @export var offset = Vector3.ZERO
 
-var scope = null
+var gun = null
 
 enum states{
 	FREE,
@@ -42,7 +42,7 @@ func _input(event):
 		rotation_degrees = cam_rot
 
 func _ready():
-	scope = character.rig.equipped
+	gun = character.rig.equipped
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -64,9 +64,9 @@ func aim():
 				state = states.TRANSITION
 				anim_ctrl.play("Shoulder")
 			states.SHOULDER:
-				if scope.find_child("Scope"):
+				if gun.find_child("Scope"):
 					state = states.SCOPED
-					scope.find_child("Scope").make_current()
+					gun.find_child("Scope").make_current()
 					anim_ctrl.play("ADS")
 					HUD.visible = false
 				else:
@@ -76,6 +76,7 @@ func aim():
 			states.SCOPED:
 				state = states.FREE
 				cam.make_current()
+				gun.aiming(false)
 				anim_ctrl.play("Reset")
 				HUD.visible = false
 		
@@ -86,6 +87,7 @@ func _on_animation_finished(anim_name):
 	match anim_name:
 		"Shoulder":
 			character.aiming = true
+			gun.aiming(true)
 			state = states.SHOULDER
 			HUD.visible = true
 		"ADS":

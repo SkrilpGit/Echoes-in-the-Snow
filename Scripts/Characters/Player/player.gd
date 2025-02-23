@@ -24,6 +24,14 @@ var esc_tog = true
 signal fire_pressed()
 signal fire_released()
 
+enum anim_states {
+	FREE,
+	TRANSITION,
+	SHOULDER,
+	SCOPED
+}
+var anim_state = anim_states.FREE
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 

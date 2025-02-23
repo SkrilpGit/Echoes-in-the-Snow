@@ -41,6 +41,7 @@ func _ready():
 	#print(rig_anim.get_animation_list())
 	#print(get_node(rig_anim.root_node))
 	rig_anim.speed_scale = anim_ctrl.speed_scale
+	rig_anim.play("K31_anims/Idle_Upper")
 
 func _process(delta):
 	if anim_ctrl.current_animation == "Idle":
@@ -77,6 +78,14 @@ func chamber():
 			rig_anim.queue("K31_anims/Chamber_Spent_Upper")
 		state = states.CHAMBERING
 		
+
+func aiming(yes):
+	if yes:
+		anim_ctrl.play("Idle")
+		rig_anim.play("K31_anims/Aiming_Upper")
+	else:
+		anim_ctrl.play("Idle")
+		rig_anim.play("K31_anims/Idle_Upper")
 
 func _on_animation_player_animation_finished(anim_name):
 	match anim_name:

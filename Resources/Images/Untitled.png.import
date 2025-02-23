@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3y6exyk5mshc"
-path.s3tc="res://.godot/imported/abstract-textured-backdrop-background.jpg-baedff520bda867bcc90bed3d63ce619.s3tc.ctex"
+uid="uid://c0shvo488ycbn"
+path.s3tc="res://.godot/imported/Untitled.png-d954b732271fd90a5fcdd84903e03be5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://abstract-textured-backdrop-background.jpg"
-dest_files=["res://.godot/imported/abstract-textured-backdrop-background.jpg-baedff520bda867bcc90bed3d63ce619.s3tc.ctex"]
+source_file="res://Resources/Images/Untitled.png"
+dest_files=["res://.godot/imported/Untitled.png-d954b732271fd90a5fcdd84903e03be5.s3tc.ctex"]
 
 [params]
 

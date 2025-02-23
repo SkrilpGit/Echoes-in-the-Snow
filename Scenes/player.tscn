@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://x6sfu4gbjdte"]
+[gd_scene load_steps=12 format=3 uid="uid://c4d62iuf56ex7"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_m50le"]
-[ext_resource type="PackedScene" uid="uid://dptoso0im7i1x" path="res://Scenes/basic_guy.tscn" id="2_4e32g"]
-[ext_resource type="Script" path="res://Scripts/Camera.gd" id="3_ymm6p"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/player.gd" id="1_j6rlq"]
+[ext_resource type="PackedScene" uid="uid://cheuyvfckuj04" path="res://Scenes/basic_guy.tscn" id="2_4e32g"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/Camera.gd" id="3_4wfwy"]
 [ext_resource type="PackedScene" uid="uid://ct7t25u0xfe3j" path="res://Scenes/hud.tscn" id="4_a3giv"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerSM.gd" id="5_ha55j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h6sl2"]
 
@@ -86,7 +87,7 @@ _data = {
 [sub_resource type="PrismMesh" id="PrismMesh_fxbl7"]
 
 [node name="Player" type="Node3D" node_paths=PackedStringArray("camera_pivot", "rig")]
-script = ExtResource("1_m50le")
+script = ExtResource("1_j6rlq")
 jump_force = 5.0
 camera_pivot = NodePath("PlayerCam")
 rig = NodePath("CharacterBody3D/basic_guy_rig")
@@ -104,14 +105,14 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.
 bones/2/rotation = Quaternion(-7.17878e-09, -0.0984797, 1.43491e-09, 0.995139)
 
 [node name="left_hand_main_attach" parent="CharacterBody3D/basic_guy_rig/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-6.86981e-07, 0.994157, 0.107943, -1, -6.59186e-07, 2.35324e-08, -1.38805e-08, -0.107943, 0.994157, 1.02398, 1.90105, -0.111181)
+transform = Transform3D(0.00760795, 0.441424, -0.897266, -0.999957, 0.00813896, -0.00447451, 0.00532745, 0.897262, 0.441467, 0.448573, 1.9094, 0.919912)
 
 [node name="Spine_IK" parent="CharacterBody3D/basic_guy_rig/Armature/Skeleton3D" index="2"]
 target_node = NodePath("../../../../../PlayerCam/IK_target")
 
 [node name="PlayerCam" type="Node3D" parent="." node_paths=PackedStringArray("anim_ctrl", "character", "cam", "HUD")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
-script = ExtResource("3_ymm6p")
+script = ExtResource("3_4wfwy")
 anim_ctrl = NodePath("AnimationPlayer")
 character = NodePath("..")
 cam = NodePath("Camera3D")
@@ -143,6 +144,9 @@ mesh = SubResource("PrismMesh_fxbl7")
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("4_a3giv")]
 visible = false
+
+[node name="PlayerStates" type="Node" parent="."]
+script = ExtResource("5_ha55j")
 
 [connection signal="animation_finished" from="PlayerCam/AnimationPlayer" to="PlayerCam" method="_on_animation_finished"]
 

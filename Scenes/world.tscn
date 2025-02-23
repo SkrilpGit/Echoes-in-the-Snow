@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpxvdujulyilw"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" uid="uid://3y6exyk5mshc" path="res://abstract-textured-backdrop-background.jpg" id="1_ieuj8"]
-[ext_resource type="ArrayMesh" uid="uid://3h2ghseooh78" path="res://Objects/Terrain.obj" id="2_q07ys"]
+[ext_resource type="Texture2D" uid="uid://3y6exyk5mshc" path="res://Resources/Images/abstract-textured-backdrop-background.jpg" id="1_ieuj8"]
+[ext_resource type="ArrayMesh" uid="uid://3h2ghseooh78" path="res://Resources/Objects/Terrain.obj" id="2_q07ys"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ri1g"]
 albedo_texture = ExtResource("1_ieuj8")

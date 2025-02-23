@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cg5n5ub18xs5u"]
+[gd_scene load_steps=4 format=3 uid="uid://ln2knglxnwfe"]
 
 [ext_resource type="Script" path="res://Scenes/casing.gd" id="1_uos88"]
-[ext_resource type="ArrayMesh" uid="uid://dmw8my43tfv3l" path="res://Objects/K31_casing.obj" id="1_w6st6"]
+[ext_resource type="ArrayMesh" uid="uid://dmw8my43tfv3l" path="res://Resources/Objects/K31_casing.obj" id="2_5ehkv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rc5be"]
 radius = 0.1
@@ -19,5 +19,5 @@ shape = SubResource("CapsuleShape3D_rc5be")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = ExtResource("1_w6st6")
+mesh = ExtResource("2_5ehkv")
 skeleton = NodePath("../..")

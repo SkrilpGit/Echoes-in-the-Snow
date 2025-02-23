@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dptoso0im7i1x"]
+[gd_scene load_steps=7 format=3 uid="uid://cheuyvfckuj04"]
 
-[ext_resource type="Script" path="res://Scripts/basic_guy.gd" id="1_d280m"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/basic_guy.gd" id="1_72fly"]
 [ext_resource type="AnimationLibrary" uid="uid://cl66sk0ko226o" path="res://Animations/basic_rig/movement_anims.glb" id="2_5usq0"]
-[ext_resource type="PackedScene" uid="uid://dk18aj7gdfu7h" path="res://Scenes/K31-55.tscn" id="2_7k416"]
+[ext_resource type="PackedScene" uid="uid://i71nwwdacq6n" path="res://Scenes/K31-55.tscn" id="2_7k416"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pql1b"]
 vertex_color_use_as_albedo = true
@@ -209,7 +209,7 @@ bind/59/bone = -1
 bind/59/pose = Transform3D(1, -5.68434e-14, 2.38497e-08, 5.68434e-14, 1, 4.2469e-13, -2.38497e-08, 1.3557e-21, 1, 8.81073e-14, -1.55, -2.10134e-21)
 
 [node name="basic_guy_rig" type="Node3D" node_paths=PackedStringArray("anim_ctrl", "spine_ik", "left_hand")]
-script = ExtResource("1_d280m")
+script = ExtResource("1_72fly")
 anim_ctrl = NodePath("AnimationPlayer")
 spine_ik = NodePath("Armature/Skeleton3D/Spine_IK")
 left_hand = NodePath("Armature/Skeleton3D/left_hand_main_attach")
@@ -651,7 +651,7 @@ mesh = SubResource("ArrayMesh_w5pdv")
 skin = SubResource("Skin_qutkb")
 
 [node name="left_hand_main_attach" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(0.00760824, 0.341993, -0.939672, -0.999957, 0.00760834, -0.00532727, 0.00532733, 0.939672, 0.342036, 0.346158, 1.90885, 0.963594)
+transform = Transform3D(0.007608, 0.341992, -0.939672, -0.999957, 0.00760856, -0.00532691, 0.00532757, 0.939672, 0.342036, 0.346158, 1.90885, 0.963594)
 bone_name = "Hand.L"
 bone_idx = 9
 

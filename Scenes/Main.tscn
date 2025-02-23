@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cp0wt7345utka"]
 
-[ext_resource type="PackedScene" uid="uid://x6sfu4gbjdte" path="res://Scenes/player.tscn" id="1_isfex"]
-[ext_resource type="PackedScene" uid="uid://bpxvdujulyilw" path="res://Scenes/world.tscn" id="2_clxtv"]
-[ext_resource type="PackedScene" uid="uid://hd2cm0hk2oc2" path="res://Scenes/target.tscn" id="3_1ic0u"]
-[ext_resource type="PackedScene" uid="uid://clrlpn2f0u0b4" path="res://Scenes/sniper_tower.tscn" id="4_hb3cc"]
+[ext_resource type="PackedScene" uid="uid://c4d62iuf56ex7" path="res://Scenes/player.tscn" id="1_isfex"]
+[ext_resource type="PackedScene" path="res://Scenes/world.tscn" id="2_clxtv"]
+[ext_resource type="PackedScene" uid="uid://cd2b18hvw1c0h" path="res://Scenes/target.tscn" id="3_1ic0u"]
+[ext_resource type="PackedScene" path="res://Scenes/sniper_tower.tscn" id="4_hb3cc"]
 
 [node name="Node3D" type="Node3D"]
 

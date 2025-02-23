@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://hd2cm0hk2oc2"]
+[gd_scene load_steps=10 format=3 uid="uid://cd2b18hvw1c0h"]
 
-[ext_resource type="Script" path="res://Scripts/Target.gd" id="1_wjg0e"]
-[ext_resource type="Script" path="res://Scripts/ColourMesh.gd" id="2_p5ft5"]
+[ext_resource type="Script" path="res://Scripts/Characters/Target.gd" id="1_gy35h"]
+[ext_resource type="Script" path="res://Scripts/Misc/ColourMesh.gd" id="2_v234f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lqldm"]
 resource_name = "Material"
@@ -88,13 +88,13 @@ _data = {
 }
 
 [node name="Target" type="Node3D" node_paths=PackedStringArray("anim_ctrl")]
-script = ExtResource("1_wjg0e")
+script = ExtResource("1_gy35h")
 anim_ctrl = NodePath("AnimationPlayer")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_gf1pq")
 skeleton = NodePath("")
-script = ExtResource("2_p5ft5")
+script = ExtResource("2_v234f")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Mesh"]
 
