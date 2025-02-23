@@ -34,9 +34,9 @@ func _ready():
 
 func _input(_event):
 	
-	if Input.is_action_just_pressed("fire"):
+	if Input.is_action_just_pressed("fire") and aiming:
 		fire_pressed.emit()
-	elif Input.is_action_just_released("fire"):
+	elif Input.is_action_just_released("fire") and aiming:
 		fire_released.emit()
 	
 	if Input.is_action_just_pressed("aim"):
@@ -76,6 +76,7 @@ func _physics_process(delta):
 	body.velocity.y -= gravity * delta
 
 	body.move_and_slide()
+	CamStates._state_logic(delta)
 	if aiming:
 		camera_pivot.position = body.position + camera_pivot.offset
 

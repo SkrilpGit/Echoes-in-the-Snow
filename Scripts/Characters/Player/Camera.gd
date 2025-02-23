@@ -9,19 +9,10 @@ var anim_ready = true
 @export var MOUSE_SENSE = 0.001
 var mouse_sensitivity = 0.1
 
-@export var offset = Vector3.ZERO
+@export var offset = Vector3.ZERO # make this value match the one in the editor :)
 
 var gun = null
 var CamStates = null
-
-enum states{
-	FREE,
-	TRANSITION,
-	SHOULDER,
-	SCOPED
-}
-
-var state = states.FREE
 
 var input_enabled = true
 
@@ -40,36 +31,17 @@ func _ready():
 func _process(delta):
 	#print(state )
 	mouse_sensitivity = get_viewport().get_camera_3d().fov * MOUSE_SENSE
-	match state:
-		states.FREE:
-			var tarPos = char.body.position + offset
-			position = lerp(position,tarPos,5*delta)
-		states.TRANSITION:
-			var tarPos = char.body.position + offset
-			position = lerp(position,tarPos,5*delta)
+	pass
+
+func camlerp(speed,delta):
+	var tarPos = char.body.position + offset
+	position = lerp(position,tarPos,speed*delta)
 
 func aim():
 	if anim_ready:
 		anim_ready = false
 		CamStates.change_state()
 		#print(CamStates.state)
-		match state:
-			states.FREE:
-				state = states.TRANSITION
-				playAnim("Shoulder")
-			states.SHOULDER:
-				if gun.find_child("Scope"):
-					state = states.SCOPED
-					gun.find_child("Scope").make_current()
-					playAnim("ADS")
-				else:
-					state = states.FREE
-					playAnim("Reset")
-			states.SCOPED:
-				state = states.FREE
-				cam.make_current()
-				gun.aiming(false)
-				playAnim("Reset")
 		
 
 func playAnim(anim):
@@ -83,10 +55,10 @@ func _on_animation_finished(anim_name):
 		"Shoulder":
 			char.aiming = true
 			gun.aiming(true)
-			state = states.SHOULDER
-			CamStates.change_state()
+			CamStates.change_state("SHOULDER")
 			HUD.visible = true
 		"ADS":
-			anim_ready = true
+			pass
 		"Reset":
-			char.aiming = false
+			#char.aiming = false
+			pass

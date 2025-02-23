@@ -38,13 +38,13 @@ func _process(delta):
 	global_position.y += gravity * delta
 	
 	if speed < muzzle_velocity/8:
-		print("too slow")
+		#print("too slow")
 		hit()
 	
 	var query = PhysicsRayQueryParameters3D.create(prev_pos, position)
 	var result = get_world_3d().direct_space_state.intersect_ray(query)
 	if result:
-		print(result["collider"].get_parent().get_parent().name)
+		#print(result["collider"].get_parent().get_parent().name)
 		hit(result["collider"])
 
 func calc_drag(delta):
@@ -54,14 +54,14 @@ func calc_drag(delta):
 func hit(target : Object = null):
 	var distance = creator.global_position - global_position
 	distance = distance.length()
-	print("bullet: "+name)
-	print("final speed: "+str(speed)+"m/s")
-	print("final distance:"+str(Global.round_to_dec(distance,2))+"m")
-	print("bullet drop: "+str(Global.round_to_dec(drop,2))+"m")
-	print("bullet time: "+str(Global.round_to_dec(lifetime,2))+"s")
+	#print("bullet: "+name)
+	#print("final speed: "+str(speed)+"m/s")
+	#print("final distance:"+str(Global.round_to_dec(distance,2))+"m")
+	#print("bullet drop: "+str(Global.round_to_dec(drop,2))+"m")
+	#print("bullet time: "+str(Global.round_to_dec(lifetime,2))+"s")
 	if target != null:
 		var real_target = target.get_parent().get_parent()
 		if real_target.has_method("hit"):
-			print("HIT")
+			#print("HIT")
 			real_target.hit()
 	queue_free()
