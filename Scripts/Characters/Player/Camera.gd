@@ -56,24 +56,25 @@ func aim():
 		match state:
 			states.FREE:
 				state = states.TRANSITION
-				anim_ctrl.play("Shoulder")
+				playAnim("Shoulder")
 			states.SHOULDER:
 				if gun.find_child("Scope"):
 					state = states.SCOPED
 					gun.find_child("Scope").make_current()
-					anim_ctrl.play("ADS")
-					HUD.visible = false
+					playAnim("ADS")
 				else:
 					state = states.FREE
-					anim_ctrl.play("Reset")
-					HUD.visible = false
+					playAnim("Reset")
 			states.SCOPED:
 				state = states.FREE
 				cam.make_current()
 				gun.aiming(false)
-				anim_ctrl.play("Reset")
-				HUD.visible = false
+				playAnim("Reset")
 		
+
+func playAnim(anim):
+	anim_ctrl.play(anim)
+	HUD.visible = false
 
 func _on_animation_finished(anim_name):
 	anim_ready = true
@@ -83,6 +84,7 @@ func _on_animation_finished(anim_name):
 			char.aiming = true
 			gun.aiming(true)
 			state = states.SHOULDER
+			CamStates.change_state()
 			HUD.visible = true
 		"ADS":
 			anim_ready = true

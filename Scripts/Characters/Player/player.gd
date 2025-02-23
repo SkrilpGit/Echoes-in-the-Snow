@@ -68,7 +68,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_right"):
 		input_dir.x += -1
 	
-	camera_pivot_state(delta)
+	camera_state(delta)
 	
 	input_dir = input_dir.normalized()
 	body.velocity.x = input_dir.x * move_speed
@@ -79,9 +79,9 @@ func _physics_process(delta):
 	if aiming:
 		camera_pivot.position = body.position + camera_pivot.offset
 
-func camera_pivot_state(delta):
+func camera_state(delta):
 	var my_rot = rig.rotation_degrees.y
-	match CamStates.states.get(CamStates.state):
+	match CamStates.states.find_key(CamStates.state):
 		
 		"TRANSITION":
 			var dir = Global.angle_to_vector2(camera_pivot.rotation.y)
@@ -113,11 +113,15 @@ func camera_pivot_state(delta):
 			rig.spine_ik.target.basis.x = camera_pivot.basis.y
 			rig.S_IK(true)
 			if input_dir:
+				set_move_animation(input_dir)
 				var angle = Global.vector2_to_angle(input_dir)
 				var n_angle = angle - camera_pivot.rotation.y
 				input_dir = Global.angle_to_vector2(n_angle)
-				rig.rotation_degrees.y = Global.lerp_to_direction(my_rot,-input_dir,5,delta)
+				var dir = Global.angle_to_vector2(camera_pivot.rotation.y)
+				dir = Vector2(-dir.x,dir.y)
+				rig.rotation_degrees.y = Global.lerp_to_direction(my_rot,dir,5,delta)
 			else:
+				rig.stand_still()
 				var dir = Global.angle_to_vector2(camera_pivot.rotation.y)
 				dir = Vector2(-dir.x,dir.y)
 				rig.rotation_degrees.y = Global.lerp_to_direction(my_rot,dir,5,delta)
@@ -134,7 +138,7 @@ func camera_pivot_state(delta):
 				rig.stand_still()
 
 func set_move_animation(dir):
-	print(dir)
+	#print(dir)
 	if dir == Vector2(0,-1):
 		rig.move_forward()
 	elif dir == Vector2(0,1):

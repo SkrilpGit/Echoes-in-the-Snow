@@ -10,9 +10,12 @@ func _ready():
 	add_state("FREE")
 	add_state("TRANSITION")
 	add_state("SHOULDER")
-	add_state("SCOPE")
+	add_state("SCOPED")
 	
 	state = states.get("FREE")
+
+#func _process(delta):
+	#print(states.find_key(state))
 
 func change_state():
 	#print("attempting to change state ...")
@@ -24,9 +27,10 @@ func change_state():
 		"TRANSITION":
 			set_state(states.get("SHOULDER"))
 		"SHOULDER":
-			set_state(states.get("SCOPE"))
-		"SCOPE":
+			set_state(states.get("SCOPED"))
+		"SCOPED":
 			set_state(states.get("FREE"))
+	#print("states.find_key(state)= ",states.find_key(state))
 
 func _state_logic(_delta):
 	pass
