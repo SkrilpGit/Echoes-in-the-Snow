@@ -21,6 +21,8 @@ var fired = false
 var spine_target
 var last_bone_transforms = {}
 
+signal recoil_recovered()
+
 func _ready():
 	
 	char = get_node("../..")
@@ -34,8 +36,8 @@ func _ready():
 	sIKoffset_pos = spine_target.global_position
 	sIKoffset_rot = spine_target.rotation
 	spine_ik.target_node = spine_target.get_path()
-	print("spine ",spine_target)
-	print(get_node(spine_ik.target_node))
+	#print("spine ",spine_target)
+	#print(get_node(spine_ik.target_node))
 	if left_hand.get_child_count() > 0:
 		char.equipped = left_hand.get_children()[0]
 	elif right_hand.get_child_count() > 0:
@@ -59,8 +61,8 @@ func _process(delta):
 			var dir2 = spine_target.position - sIKoffset_pos
 			dir2 = dir2.normalized()
 			dir = dir.normalized()
-			recoil_bones.position -= dir * 0.75*delta
-			spine_target.position += dir2 * 1.5*delta
+			recoil_bones.position -= dir * 1*delta
+			spine_target.position += dir2 * 2*delta
 			recoil_bones.rotation = lerp(recoil_bones.rotation,recoil_offset_rot,10*delta)
 			spine_target.rotation = lerp(spine_target.rotation,sIKoffset_rot,10*delta)
 		elif recoil_bones.position.distance_to(recoil_offset_pos) <= 0.05:
@@ -68,6 +70,7 @@ func _process(delta):
 			spine_target.position = Vector3.ZERO
 			spine_target.rotation = sIKoffset_rot
 			recoil_bones.rotation = recoil_offset_rot
+			recoil_recovered.emit()
 			call_deferred("stop_recoil_IK")
 			
 	pass
@@ -77,7 +80,7 @@ func recoil(dir: Vector3,force: float):
 	var rot = calculate_recoil_rot(dir,force)
 	recoil_bones.global_position += dir * force/2
 	spine_target.global_position += dir * force
-	spine_target.rotation_degrees += Vector3(rot.x,-rot.y,rot.z)*10
+	spine_target.rotation_degrees += Vector3(rot.x,-rot.y*2,rot.z)*10
 	recoil_bones.rotation_degrees += rot
 	skeleton.find_child("Arm_IK_R").set_interpolation(1.0)
 	skeleton.find_child("Arm_IK_L").set_interpolation(1.0)

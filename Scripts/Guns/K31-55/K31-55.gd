@@ -22,6 +22,8 @@ enum states{
 var state = states.READY
 var anim_queue = []
 
+var RTC = true
+
 func _ready():
 	#find the node that controls this characters behaviour
 	# k31-55 -> bone attach -> skeleton -> armature -> rig -> body3D -> character
@@ -30,6 +32,7 @@ func _ready():
 	print(character)
 	character.fire_pressed.connect(self.fire)
 	character.fire_released.connect(self.chamber)
+	character.rig.recoil_recovered.connect(self.recovered)
 	
 	
 	rig_anim.name = "RigPlayer"
@@ -55,17 +58,26 @@ func fire():
 			anim_ctrl.queue("Fire")
 			rig_anim.queue("K31_anims/Fire_Upper")
 		state = states.FIRED
+		RTC = false
 
 func chamber():
 	if state == states.FIRED:
-		if anim_ctrl.current_animation == "Idle":
-			anim_ctrl.play("Chamber_Spent")
-			rig_anim.play("K31_anims/Chamber_Spent_Upper")
-		else:
+		if RTC:
 			anim_ctrl.queue("Chamber_Spent")
 			rig_anim.queue("K31_anims/Chamber_Spent_Upper")
+		else:
+			anim_queue.append("Chamber_Spent")
 		state = states.CHAMBERING
 		
+
+func recovered():
+	RTC = true
+	if !anim_queue.is_empty():
+		if anim_queue[0] == "Chamber_Spent":
+			anim_queue = []
+			anim_ctrl.queue("Chamber_Spent")
+			rig_anim.queue("K31_anims/Chamber_Spent_Upper")
+	pass
 
 func aiming(yes):
 	if yes:
