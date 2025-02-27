@@ -138,6 +138,7 @@ transform = Transform3D(-0.923879, 0.0193611, 0.382193, 0, 0.998719, -0.0505929,
 
 [node name="DebugTriPrism" type="MeshInstance3D" parent="PlayerCam/IK_target"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
 mesh = SubResource("PrismMesh_fxbl7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

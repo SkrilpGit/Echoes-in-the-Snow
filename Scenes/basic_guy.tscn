@@ -670,8 +670,6 @@ tip_bone = &"Chest"
 
 [node name="Arm_IK_Tar_L" type="Node3D" parent="Armature/Skeleton3D/Recoil Bones"]
 
-[node name="Head_IK_Tar" type="Node3D" parent="Armature/Skeleton3D/Recoil Bones"]
-
 [node name="Arm_IK_R" type="SkeletonIK3D" parent="Armature/Skeleton3D"]
 process_priority = 1
 root_bone = &"UpperArm.R"
@@ -683,11 +681,5 @@ process_priority = 1
 root_bone = &"UpperArm.L"
 tip_bone = &"Hand.L"
 target_node = NodePath("../Recoil Bones/Arm_IK_Tar_L")
-
-[node name="Head_IK" type="SkeletonIK3D" parent="Armature/Skeleton3D"]
-process_priority = 1
-root_bone = &"Abdomen"
-tip_bone = &"Head"
-target_node = NodePath("../Recoil Bones/Head_IK_Tar")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
