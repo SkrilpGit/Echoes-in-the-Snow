@@ -105,9 +105,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.
 [node name="Skeleton3D" parent="CharacterBody3D/basic_guy_rig/Armature" index="0"]
 bones/2/rotation = Quaternion(-7.17878e-09, -0.0984797, 1.43491e-09, 0.995139)
 
-[node name="left_hand_main_attach" parent="CharacterBody3D/basic_guy_rig/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.00760795, 0.441424, -0.897266, -0.999957, 0.00813896, -0.00447451, 0.00532745, 0.897262, 0.441467, 0.448573, 1.9094, 0.919912)
-
 [node name="Spine_IK" parent="CharacterBody3D/basic_guy_rig/Armature/Skeleton3D" index="2"]
 target_node = NodePath("../../../../../PlayerCam/IK_target")
 

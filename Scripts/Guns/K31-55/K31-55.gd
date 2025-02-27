@@ -78,7 +78,7 @@ func aiming(yes):
 			anim_ctrl.queue("Idle")
 			rig_anim.queue("K31_anims/Aiming_Upper")
 	else:
-		print(anim_ctrl.current_animation)
+		#print(anim_ctrl.current_animation)
 		if anim_ctrl.current_animation == "Idle":
 			anim_ctrl.play("Idle")
 			rig_anim.play("K31_anims/Idle_Upper")
@@ -92,12 +92,20 @@ func _on_animation_player_animation_finished(anim_name):
 			anim_ctrl.play("Idle")
 			rig_anim.play("K31_anims/Aiming_Upper")
 		"Chamber_Spent":
-			print("RTF!")
+			#print("RTF!")
 			anim_ctrl.play("Idle")
 			rig_anim.play("K31_anims/Aiming_Upper")
 			state = states.READY
 		"Idle":
 			pass
+
+func recoil():
+	#print("HIIII")
+	character.rig.init_recoil()
+	var dir = Vector3.BACK
+	var force = 1
+	character.rig.recoil(dir,force)
+	pass
 
 func spawn_bullet():
 	var instance = bullet.instantiate()
