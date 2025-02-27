@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 
 
 func angle_to_vector2(angle : float):

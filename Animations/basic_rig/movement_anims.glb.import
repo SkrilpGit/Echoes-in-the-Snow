@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
-uid="uid://b0sygf6x54tt1"
-path="res://.godot/imported/K31-55.glb-13e2038ec21082a581b9b22564f58d6f.scn"
+type="AnimationLibrary"
+uid="uid://cl66sk0ko226o"
+path="res://.godot/imported/movement_anims.glb-49cfe3bda77d7bcd4b2271dd94ec0c58.res"
 
 [deps]
 
-source_file="res://Objects/K31-55.glb"
-dest_files=["res://.godot/imported/K31-55.glb-13e2038ec21082a581b9b22564f58d6f.scn"]
+source_file="res://Animations/basic_rig/movement_anims.glb"
+dest_files=["res://.godot/imported/movement_anims.glb-49cfe3bda77d7bcd4b2271dd94ec0c58.res"]
 
 [params]
 

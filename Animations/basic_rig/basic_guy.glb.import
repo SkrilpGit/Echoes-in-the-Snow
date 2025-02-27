@@ -4,12 +4,12 @@ importer="animation_library"
 importer_version=1
 type="AnimationLibrary"
 uid="uid://p45denwjnv1i"
-path="res://.godot/imported/basic_guy.glb-a84ca1bbf76a393c3112c8d72ea8528b.res"
+path="res://.godot/imported/basic_guy.glb-3715c3429c86090ff9cacd55a1b66562.res"
 
 [deps]
 
-source_file="res://Animations/basic_guy.glb"
-dest_files=["res://.godot/imported/basic_guy.glb-a84ca1bbf76a393c3112c8d72ea8528b.res"]
+source_file="res://Animations/basic_rig/basic_guy.glb"
+dest_files=["res://.godot/imported/basic_guy.glb-3715c3429c86090ff9cacd55a1b66562.res"]
 
 [params]
 

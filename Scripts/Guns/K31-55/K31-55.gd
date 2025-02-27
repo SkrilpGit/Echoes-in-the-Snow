@@ -41,6 +41,63 @@ func _ready():
 	#print(rig_anim.get_animation_list())
 	#print(get_node(rig_anim.root_node))
 	rig_anim.speed_scale = anim_ctrl.speed_scale
+	rig_anim.play("K31_anims/Idle_Upper")
+
+func _process(delta):
+		pass
+
+func fire():
+	if state == states.READY:
+		if anim_ctrl.current_animation == "Idle":
+			anim_ctrl.play("Fire")
+			rig_anim.play("K31_anims/Fire_Upper")
+		else:
+			anim_ctrl.queue("Fire")
+			rig_anim.queue("K31_anims/Fire_Upper")
+		state = states.FIRED
+
+func chamber():
+	if state == states.FIRED:
+		if anim_ctrl.current_animation == "Idle":
+			anim_ctrl.play("Chamber_Spent")
+			rig_anim.play("K31_anims/Chamber_Spent_Upper")
+		else:
+			anim_ctrl.queue("Chamber_Spent")
+			rig_anim.queue("K31_anims/Chamber_Spent_Upper")
+		state = states.CHAMBERING
+		
+
+func aiming(yes):
+	if yes:
+		if state == states.CHAMBERING:
+			state = states.READY
+		if anim_ctrl.current_animation == "Idle":
+			anim_ctrl.play("Idle")
+			rig_anim.play("K31_anims/Aiming_Upper")
+		else:
+			anim_ctrl.queue("Idle")
+			rig_anim.queue("K31_anims/Aiming_Upper")
+	else:
+		print(anim_ctrl.current_animation)
+		if anim_ctrl.current_animation == "Idle":
+			anim_ctrl.play("Idle")
+			rig_anim.play("K31_anims/Idle_Upper")
+		else:
+			anim_ctrl.queue("Idle")
+			rig_anim.queue("K31_anims/Idle_Upper")
+
+func _on_animation_player_animation_finished(anim_name):
+	match anim_name:
+		"Fire":
+			anim_ctrl.play("Idle")
+			rig_anim.play("K31_anims/Aiming_Upper")
+		"Chamber_Spent":
+			print("RTF!")
+			anim_ctrl.play("Idle")
+			rig_anim.play("K31_anims/Aiming_Upper")
+			state = states.READY
+		"Idle":
+			pass
 
 func spawn_bullet():
 	var instance = bullet.instantiate()
@@ -51,39 +108,6 @@ func spawn_bullet():
 	instance.creator = owner
 	get_tree().get_root().add_child.call_deferred(instance)
 	#print("bullet b_spawned")
-
-func fire():
-	if state == states.READY:
-		if anim_ctrl.get_animation("Idle"):
-			anim_ctrl.play("Fire")
-			rig_anim.play("K31_anims/Fire_Upper")
-		elif anim_ctrl.get_queue().is_empty():
-			anim_ctrl.queue("Fire")
-			rig_anim.queue("K31_anims/Fire_Upper")
-		state = states.FIRED
-
-func chamber():
-	if state == states.FIRED:
-		if anim_ctrl.current_animation == "":
-			anim_ctrl.play("Chamber_Spent")
-			rig_anim.play("K31_anims/Chamber_Spent_Upper")
-		elif anim_ctrl.get_queue().is_empty():
-			anim_ctrl.queue("Chamber_Spent")
-			rig_anim.queue("K31_anims/Chamber_Spent_Upper")
-		state = states.CHAMBERING
-		
-
-func _on_animation_player_animation_finished(anim_name):
-	match anim_name:
-		"Fire":
-			anim_ctrl.play("Idle")
-			rig_anim.play("K31_anims/Aiming_Upper")
-		"Chamber_Spent":
-			anim_ctrl.play("Idle")
-			rig_anim.play("K31_anims/Aiming_Upper")
-			state = states.READY
-		"Idle":
-			pass
 
 func eject_casing():
 	var instance = casing.instantiate()
@@ -96,4 +120,4 @@ func eject_casing():
 	instance.apply_impulse(dir*30)
 	var random_torque = Vector3(randf_range(-10, 10), randf_range(-10, 10), randf_range(-10, 10))
 	instance.apply_torque_impulse(random_torque)
-	print(random_torque)
+	#print(random_torque)

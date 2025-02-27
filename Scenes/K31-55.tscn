@@ -1,12 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://bwjdmv22kl2f8"]
+[gd_scene load_steps=24 format=3 uid="uid://i71nwwdacq6n"]
 
-[ext_resource type="Script" path="res://Scripts/K31-55.gd" id="1_r7rib"]
-[ext_resource type="PackedScene" uid="uid://b52m2bfvu0qlo" path="res://Scenes/K31_Bullet.tscn" id="2_tssna"]
+[ext_resource type="Script" path="res://Scripts/Guns/K31-55/K31-55.gd" id="1_kcebn"]
+[ext_resource type="AnimationLibrary" uid="uid://vau1lawu12cd" path="res://Animations/basic_rig/K31_anims2.res" id="2_jxeau"]
+[ext_resource type="PackedScene" uid="uid://cchypb422moo8" path="res://Scenes/K31_Bullet.tscn" id="2_tssna"]
 [ext_resource type="Script" path="res://Scenes/Scope.gd" id="3_kh0d6"]
-[ext_resource type="PackedScene" uid="uid://cg5n5ub18xs5u" path="res://Scenes/K31_casing.tscn" id="3_qee8b"]
+[ext_resource type="PackedScene" uid="uid://ln2knglxnwfe" path="res://Scenes/K31_casing.tscn" id="3_qee8b"]
 [ext_resource type="PackedScene" uid="uid://wd65cqndsi8o" path="res://Scenes/Scope_hud.tscn" id="4_0uo4f"]
-[ext_resource type="AnimationLibrary" uid="uid://bl0whmbx0prq0" path="res://Animations/K31_anims.glb" id="4_x6te8"]
-[ext_resource type="Texture2D" uid="uid://xey3al7pobfr" path="res://Crosshair.png" id="5_tltgc"]
+[ext_resource type="Texture2D" uid="uid://xey3al7pobfr" path="res://Resources/Images/Crosshair.png" id="7_txavq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mso7f"]
 
@@ -685,9 +685,9 @@ _data = {
 }
 
 [node name="K31-55" type="Node3D" node_paths=PackedStringArray("anim_ctrl")]
-script = ExtResource("1_r7rib")
+script = ExtResource("1_kcebn")
 anim_ctrl = NodePath("GunPlayer")
-rig_anim_lib = ExtResource("4_x6te8")
+rig_anim_lib = ExtResource("2_jxeau")
 bullet = ExtResource("2_tssna")
 casing = ExtResource("3_qee8b")
 
@@ -762,7 +762,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 11.3)
 transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -0.414914, 0.860259, 0.169793)
 
 [node name="GunPlayer" type="AnimationPlayer" parent="."]
-speed_scale = 3.0
 libraries = {
 "": SubResource("AnimationLibrary_fsmcm")
 }
@@ -808,7 +807,7 @@ offset_right = -208.0
 offset_bottom = 119.0
 
 [node name="Crosshair" type="Sprite2D" parent="Scope/Scope_HUD"]
-texture = ExtResource("5_tltgc")
+texture = ExtResource("7_txavq")
 
 [connection signal="animation_finished" from="GunPlayer" to="." method="_on_animation_player_animation_finished"]
 
