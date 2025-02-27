@@ -664,22 +664,22 @@ process_priority = 1
 root_bone = &"Abdomen"
 tip_bone = &"Chest"
 
-[node name="Recoil Bones" type="Node3D" parent="Armature/Skeleton3D"]
+[node name="Recoil Bonez" type="Node3D" parent="Armature/Skeleton3D"]
 
-[node name="Arm_IK_Tar_R" type="Node3D" parent="Armature/Skeleton3D/Recoil Bones"]
+[node name="Arm_IK_Tar_R" type="Node3D" parent="Armature/Skeleton3D/Recoil Bonez"]
 
-[node name="Arm_IK_Tar_L" type="Node3D" parent="Armature/Skeleton3D/Recoil Bones"]
+[node name="Arm_IK_Tar_L" type="Node3D" parent="Armature/Skeleton3D/Recoil Bonez"]
 
 [node name="Arm_IK_R" type="SkeletonIK3D" parent="Armature/Skeleton3D"]
 process_priority = 1
 root_bone = &"UpperArm.R"
 tip_bone = &"Hand.R"
-target_node = NodePath("../Recoil Bones/Arm_IK_Tar_R")
+target_node = NodePath("../Recoil Bonez/Arm_IK_Tar_R")
 
 [node name="Arm_IK_L" type="SkeletonIK3D" parent="Armature/Skeleton3D"]
 process_priority = 1
 root_bone = &"UpperArm.L"
 tip_bone = &"Hand.L"
-target_node = NodePath("../Recoil Bones/Arm_IK_Tar_L")
+target_node = NodePath("../Recoil Bonez/Arm_IK_Tar_L")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

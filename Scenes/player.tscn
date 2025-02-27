@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4d62iuf56ex7"]
+[gd_scene load_steps=14 format=3 uid="uid://c4d62iuf56ex7"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player.gd" id="1_j6rlq"]
 [ext_resource type="PackedScene" uid="uid://cheuyvfckuj04" path="res://Scenes/basic_guy.tscn" id="2_4e32g"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Camera.gd" id="3_4wfwy"]
+[ext_resource type="Script" path="res://Scenes/recoil_bones.gd" id="4_8xa2l"]
 [ext_resource type="PackedScene" uid="uid://ct7t25u0xfe3j" path="res://Scenes/hud.tscn" id="4_a3giv"]
 [ext_resource type="Script" path="res://Scenes/CameraStates.gd" id="5_6h33b"]
 [ext_resource type="Script" path="res://Scenes/MovementStates.gd" id="6_cws37"]
@@ -100,7 +101,7 @@ transform = Transform3D(1, 0, 0, 0, 1.19644, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_h6sl2")
 
 [node name="basic_guy_rig" parent="CharacterBody3D" instance=ExtResource("2_4e32g")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.26079, 0)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, -1.26079, 0)
 
 [node name="Skeleton3D" parent="CharacterBody3D/basic_guy_rig/Armature" index="0"]
 bones/2/rotation = Quaternion(-7.17878e-09, -0.0984797, 1.43491e-09, 0.995139)
@@ -121,9 +122,9 @@ HUD = NodePath("../CanvasLayer/HUD")
 offset = Vector3(0, 0.8, 0)
 
 [node name="Camera3D" type="Camera3D" parent="PlayerCam"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.604115, 0.749964, 3.37474)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.239, 0, -1.244)
 current = true
-fov = 50.0
+fov = 10.0
 far = 10000.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerCam"]
@@ -136,10 +137,18 @@ libraries = {
 [node name="IK_target" type="Node3D" parent="PlayerCam"]
 transform = Transform3D(-0.923879, 0.0193611, 0.382193, 0, 0.998719, -0.0505929, -0.382683, -0.0467418, -0.922695, 0, 0, 0)
 
-[node name="DebugTriPrism" type="MeshInstance3D" parent="PlayerCam/IK_target"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+[node name="Recoil Bones" type="Node3D" parent="PlayerCam"]
+script = ExtResource("4_8xa2l")
+
+[node name="Arm_IK_Tar_R" type="Node3D" parent="PlayerCam/Recoil Bones"]
+
+[node name="Arm_IK_Tar_L" type="Node3D" parent="PlayerCam/Recoil Bones"]
+
+[node name="DebugTriPrism" type="MeshInstance3D" parent="PlayerCam/Recoil Bones"]
+transform = Transform3D(0.461939, -0.00968055, -0.191097, 0, 0.499359, -0.0252964, 0.191342, 0.0233709, 0.461347, 0, 0, 0)
 visible = false
 mesh = SubResource("PrismMesh_fxbl7")
+skeleton = NodePath("../../IK_target")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
