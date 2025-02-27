@@ -102,9 +102,9 @@ func _on_animation_player_animation_finished(anim_name):
 func recoil():
 	#print("HIIII")
 	character.rig.init_recoil()
-	var dir = Vector3.BACK
-	var force = 1
-	character.rig.recoil(dir,force)
+	var dir = b_spawn.global_position - global_position
+	var force = 0.5
+	character.rig.recoil(-dir,force)
 	pass
 
 func spawn_bullet():

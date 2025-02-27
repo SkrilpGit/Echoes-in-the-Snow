@@ -13,6 +13,8 @@ var recoil_bones = Node3D
 var recoil_offset = Vector3.ZERO
 var char = Node3D
 
+var fired = false
+
 func _ready():
 	
 	char = get_node("../..")
@@ -30,27 +32,43 @@ func init_recoil():
 	var hand_r_transform = skeleton.get_bone_global_pose(skeleton.find_bone("Hand.R"))
 	var hand_r = skeleton.find_child("Arm_IK_Tar_R")
 	hand_r.transform = hand_r_transform
-	skeleton.find_child("Arm_IK_R").start()
 	
 	var hand_l_transform = skeleton.get_bone_global_pose(skeleton.find_bone("Hand.L"))
 	var hand_l = skeleton.find_child("Arm_IK_Tar_L")
 	hand_l.transform = hand_l_transform
+	
+	var head_transform = skeleton.get_bone_global_pose(skeleton.find_bone("Head"))
+	var head = skeleton.find_child("Head_IK_Tar")
+	head.transform = head_transform
+	
+	skeleton.find_child("Arm_IK_R").start()
 	skeleton.find_child("Arm_IK_L").start()
+	skeleton.find_child("Head_IK").start()
 	
 	pass
 
 func _process(delta):
-	if recoil_bones.position != recoil_offset:
-		recoil_bones.position = lerp(recoil_bones.position,recoil_offset,5*delta)
-	elif recoil_bones.position == recoil_offset:
-		skeleton.find_child("Arm_IK_R").stop()
-		skeleton.find_child("Arm_IK_L").stop()
+	if fired:
+		if recoil_bones.position.distance_to(recoil_offset) > 0.05:
+			var dir = recoil_bones.position - recoil_offset
+			recoil_bones.position -= dir * 10*delta
+		elif recoil_bones.position.distance_to(recoil_offset) <= 0.05:
+			fired = false
+			skeleton.find_child("Arm_IK_R").set_interpolation(0.0)
+			skeleton.find_child("Arm_IK_L").set_interpolation(0.0)
+			skeleton.find_child("Head_IK").set_interpolation(0.0)
+			skeleton.find_child("Head_IK").stop()
+			skeleton.force_update_all_bone_transforms()
+			pass
 	pass
-
 func recoil(dir: Vector3,force: float):
-	#print(dir," ",force)
-	print(recoil_bones.position)
+	#print(dir)
+	#print(recoil_bones.position)
 	recoil_bones.global_position += dir * force
+	skeleton.find_child("Arm_IK_R").set_interpolation(1.0)
+	skeleton.find_child("Arm_IK_L").set_interpolation(1.0)
+	skeleton.find_child("Head_IK").set_interpolation(1.0)
+	fired = true
 	pass
 
 func S_IK(start):
@@ -58,6 +76,9 @@ func S_IK(start):
 		spine_ik.start()
 	else:
 		spine_ik.stop()
+		skeleton.find_child("Arm_IK_R").stop()
+		skeleton.find_child("Arm_IK_L").stop()
+		skeleton.find_child("Head_IK").stop()
 
 func move_forward():
 	if anim_ctrl.current_animation != "movement_anims/move_forward_standing":
