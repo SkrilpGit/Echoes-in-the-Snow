@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cp0wt7345utka"]
 
-[ext_resource type="PackedScene" uid="uid://c4d62iuf56ex7" path="res://Scenes/player.tscn" id="1_isfex"]
+[ext_resource type="PackedScene" uid="uid://dwyea5gush14j" path="res://Scenes/player.tscn" id="1_isfex"]
 [ext_resource type="PackedScene" path="res://Scenes/world.tscn" id="2_clxtv"]
 [ext_resource type="PackedScene" uid="uid://cd2b18hvw1c0h" path="res://Scenes/target.tscn" id="3_1ic0u"]
 [ext_resource type="PackedScene" path="res://Scenes/sniper_tower.tscn" id="4_hb3cc"]

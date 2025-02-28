@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/basic_guy.gd" id="1_72fly"]
 [ext_resource type="AnimationLibrary" uid="uid://cl66sk0ko226o" path="res://Animations/basic_rig/movement_anims.glb" id="2_5usq0"]
-[ext_resource type="PackedScene" uid="uid://i71nwwdacq6n" path="res://Scenes/K31-55.tscn" id="2_7k416"]
+[ext_resource type="PackedScene" uid="uid://86y18lc16cyn" path="res://Scenes/K31-55.tscn" id="2_7k416"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pql1b"]
 vertex_color_use_as_albedo = true
@@ -664,22 +664,14 @@ process_priority = 1
 root_bone = &"Abdomen"
 tip_bone = &"Chest"
 
-[node name="Recoil Bonez" type="Node3D" parent="Armature/Skeleton3D"]
-
-[node name="Arm_IK_Tar_R" type="Node3D" parent="Armature/Skeleton3D/Recoil Bonez"]
-
-[node name="Arm_IK_Tar_L" type="Node3D" parent="Armature/Skeleton3D/Recoil Bonez"]
-
 [node name="Arm_IK_R" type="SkeletonIK3D" parent="Armature/Skeleton3D"]
 process_priority = 1
 root_bone = &"UpperArm.R"
 tip_bone = &"Hand.R"
-target_node = NodePath("../Recoil Bonez/Arm_IK_Tar_R")
 
 [node name="Arm_IK_L" type="SkeletonIK3D" parent="Armature/Skeleton3D"]
 process_priority = 1
 root_bone = &"UpperArm.L"
 tip_bone = &"Hand.L"
-target_node = NodePath("../Recoil Bonez/Arm_IK_Tar_L")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

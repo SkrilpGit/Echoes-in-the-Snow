@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ln2knglxnwfe"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://Scenes/casing.gd" id="1_uos88"]
+[ext_resource type="Script" path="res://Scripts/Guns/casing.gd" id="1_uos88"]
 [ext_resource type="ArrayMesh" uid="uid://dmw8my43tfv3l" path="res://Resources/Objects/K31_casing.obj" id="2_5ehkv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rc5be"]

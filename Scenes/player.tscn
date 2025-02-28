@@ -1,12 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4d62iuf56ex7"]
+[gd_scene load_steps=14 format=3 uid="uid://dwyea5gush14j"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player.gd" id="1_j6rlq"]
 [ext_resource type="PackedScene" uid="uid://cheuyvfckuj04" path="res://Scenes/basic_guy.tscn" id="2_4e32g"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Camera.gd" id="3_4wfwy"]
-[ext_resource type="Script" path="res://Scenes/recoil_bones.gd" id="4_8xa2l"]
 [ext_resource type="PackedScene" uid="uid://ct7t25u0xfe3j" path="res://Scenes/hud.tscn" id="4_a3giv"]
-[ext_resource type="Script" path="res://Scenes/CameraStates.gd" id="5_6h33b"]
-[ext_resource type="Script" path="res://Scenes/MovementStates.gd" id="6_cws37"]
+[ext_resource type="Script" path="res://Scripts/Characters/RecoilController.gd" id="4_lta0n"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/CameraStates.gd" id="6_rvif3"]
+[ext_resource type="Script" path="res://Scripts/Characters/MovementStates.gd" id="7_oj30a"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h6sl2"]
 
@@ -137,14 +137,14 @@ libraries = {
 [node name="IK_target" type="Node3D" parent="PlayerCam"]
 transform = Transform3D(-0.923879, 0.0193611, 0.382193, 0, 0.998719, -0.0505929, -0.382683, -0.0467418, -0.922695, 0, 0, 0)
 
-[node name="Recoil Bones" type="Node3D" parent="PlayerCam"]
-script = ExtResource("4_8xa2l")
+[node name="RecoilController" type="Node3D" parent="PlayerCam"]
+script = ExtResource("4_lta0n")
 
-[node name="Arm_IK_Tar_R" type="Node3D" parent="PlayerCam/Recoil Bones"]
+[node name="Arm_IK_Tar_R" type="Node3D" parent="PlayerCam/RecoilController"]
 
-[node name="Arm_IK_Tar_L" type="Node3D" parent="PlayerCam/Recoil Bones"]
+[node name="Arm_IK_Tar_L" type="Node3D" parent="PlayerCam/RecoilController"]
 
-[node name="DebugTriPrism" type="MeshInstance3D" parent="PlayerCam/Recoil Bones"]
+[node name="DebugTriPrism" type="MeshInstance3D" parent="PlayerCam/RecoilController"]
 transform = Transform3D(0.461939, -0.00968055, -0.191097, 0, 0.499359, -0.0252964, 0.191342, 0.0233709, 0.461347, 0, 0, 0)
 visible = false
 mesh = SubResource("PrismMesh_fxbl7")
@@ -156,10 +156,10 @@ skeleton = NodePath("../../IK_target")
 visible = false
 
 [node name="CameraStates" type="Node" parent="."]
-script = ExtResource("5_6h33b")
+script = ExtResource("6_rvif3")
 
 [node name="MovementStates" type="Node" parent="."]
-script = ExtResource("6_cws37")
+script = ExtResource("7_oj30a")
 
 [connection signal="animation_finished" from="PlayerCam/AnimationPlayer" to="PlayerCam" method="_on_animation_finished"]
 

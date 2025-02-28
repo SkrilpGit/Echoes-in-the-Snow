@@ -22,6 +22,7 @@ enum states{
 var state = states.READY
 var anim_queue = []
 
+var recoil_controller
 var RTC = true
 
 func _ready():
@@ -32,7 +33,8 @@ func _ready():
 	print(character)
 	character.fire_pressed.connect(self.fire)
 	character.fire_released.connect(self.chamber)
-	character.rig.recoil_recovered.connect(self.recovered)
+	recoil_controller = character.find_child("RecoilController")
+	recoil_controller.recoil_recovered.connect(self.recovered)
 	
 	
 	rig_anim.name = "RigPlayer"
@@ -113,10 +115,10 @@ func _on_animation_player_animation_finished(anim_name):
 
 func recoil():
 	#print("HIIII")
-	character.rig.init_recoil()
+	recoil_controller.init_recoil()
 	var dir = b_spawn.global_position - global_position
 	var force = 0.5
-	character.rig.recoil(-dir,force)
+	recoil_controller.recoil(-dir,force)
 	pass
 
 func spawn_bullet():
