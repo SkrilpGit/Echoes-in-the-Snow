@@ -46,12 +46,12 @@ func _process(delta):
 	global_position.y += gravity * delta
 	
 	if distance >= counter:
-		print(speed,"m/s at ",distance,"m")
-		print(speed-prev_speed)
+		#print(speed,"m/s at ",distance,"m")
+		#print(speed-prev_speed)
 		prev_speed = speed
 		counter += 100
 	
-	if velocity.length() < 10:
+	if speed < 100:
 		#print("too slow")
 		hit()
 	
@@ -62,15 +62,23 @@ func _process(delta):
 		hit(result["collider"])
 
 func calc_drag(delta):
-	#print(air_resistance)
-	#y = m^x
+	# wow what a cool algorithm
 	var drag
+	#supersonic
 	if speed >= 345:
-		drag = (pow(speed,2))*BC/1000
+		drag = (pow(speed,2))*BC/75
 	else:
-		drag = (pow(speed,2))*BC/2000
-	speed -= drag * delta
+		drag = (pow(speed,2))*BC/200
+	speed -= drag/bullet_weight * delta
 	#print(speed)
+
+func prnt_info(target_name):
+	print("bullet: ",name,"\n",
+	"target hit: ",target_name,"\n",
+	"final speed: ",str(speed),"m/s","\n",
+	"final distance: ",str(Global.round_to_dec(distance,2)),"m","\n",
+	"bullet drop: ",str(Global.round_to_dec(drop,2)),"m","\n",
+	"bullet time: ",str(Global.round_to_dec(lifetime,2)),"s")
 
 func hit(target : Object = null):
 	var target_name = "null"
@@ -81,11 +89,6 @@ func hit(target : Object = null):
 			real_target.hit()
 		target_name = target.get_parent().get_parent().name
 	
-	print("bullet: ",name,"\n",
-	"target hit: ",target_name,"\n",
-	"final speed: ",str(speed),"m/s","\n",
-	"final distance: ",str(Global.round_to_dec(distance,2)),"m","\n",
-	"bullet drop: ",str(Global.round_to_dec(drop,2)),"m","\n",
-	"bullet time: ",str(Global.round_to_dec(lifetime,2)),"s")
+	prnt_info(target_name)
 	
 	queue_free()
