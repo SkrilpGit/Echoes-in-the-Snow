@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var barrel_length = 610 # ~ 24 inch barrel
+@export var gun_weight = 4.5 # weight in kg
 @export var anim_ctrl = AnimationPlayer.new()
 @export var rig_anim_lib = AnimationLibrary
 
@@ -13,6 +15,7 @@ extends Node3D
 
 @onready var rig_anim = AnimationPlayer.new()
 var character
+var bullet_instance = null
 
 enum states{
 	FIRED,
@@ -116,20 +119,32 @@ func _on_animation_player_animation_finished(anim_name):
 func recoil():
 	#print("HIIII")
 	recoil_controller.init_recoil()
-	var recoil_pos = Vector3(position.x,b_spawn.position.y+0.1,position.z)
+	
+	var recoil_pos = Vector3(position.x,b_spawn.position.y-0.1,position.z)
 	var dir = b_spawn.global_position - to_global(recoil_pos)
-	var force = 0.5
+	# calculate recoil force :)
+	var force
+	if bullet_instance != null:
+		#KE = 1/2mv^2 
+		var mass = bullet_instance.bullet_weight / 1000 # mass in kilos
+		# bullet from rest to muzzle_velocity in a time determined by the barrel length
+		var KE = 0.5*mass*pow(bullet_instance.muzzle_velocity,2)
+		force = sqrt(2*KE/gun_weight)
+		print(force)
+	else:
+		print("error: bullet not found")
+		force = 0.5
 	recoil_controller.recoil(-dir,force)
 	pass
 
 func spawn_bullet():
-	var instance = bullet.instantiate()
+	bullet_instance = bullet.instantiate()
 	#instance.global_position = b_spawn.global_position
-	instance.global_transform = b_spawn.global_transform
+	bullet_instance.global_transform = b_spawn.global_transform
 	var direction = b_spawn.global_position - global_position
-	instance.dir = direction
-	instance.creator = owner
-	get_tree().get_root().add_child.call_deferred(instance)
+	bullet_instance.dir = direction
+	bullet_instance.creator = owner
+	get_tree().get_root().add_child.call_deferred(bullet_instance)
 	#print("bullet b_spawned")
 
 func eject_casing():

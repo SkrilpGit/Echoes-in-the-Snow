@@ -700,6 +700,8 @@ _data = {
 
 [node name="K31-55" type="Node3D" node_paths=PackedStringArray("anim_ctrl")]
 script = ExtResource("1_kcebn")
+barrel_length = 652
+gun_weight = 4.0
 anim_ctrl = NodePath("GunPlayer")
 rig_anim_lib = ExtResource("2_jxeau")
 bullet = ExtResource("2_tssna")
@@ -781,6 +783,7 @@ libraries = {
 [node name="Scope" type="Camera3D" parent="." node_paths=PackedStringArray("HUD", "MODE", "mag", "elev", "wind")]
 transform = Transform3D(-1, 5.18473e-09, 8.72689e-08, 0, 0.99824, -0.0593064, -8.74228e-08, -0.0593064, -0.99824, 0, 1.36008, 2.55555)
 fov = 10.0
+near = 1.0
 far = 15000.0
 script = ExtResource("5_ldlb6")
 HUD = NodePath("Scope_HUD")

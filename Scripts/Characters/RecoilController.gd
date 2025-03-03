@@ -80,6 +80,7 @@ func _process(delta):
 func recoil(dir: Vector3,force: float):
 	#print(recoil_controller.position)
 	print(dir)
+	force = force/100
 	var rot = calculate_recoil_rot(dir,force)
 	recoil_controller.global_position += dir * force/2
 	spine_target.global_position += dir * force
