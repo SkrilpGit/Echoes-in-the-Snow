@@ -89,6 +89,6 @@ func hit(target : Object = null):
 			real_target.hit()
 		target_name = target.get_parent().get_parent().name
 	
-	prnt_info(target_name)
+	#prnt_info(target_name)
 	
 	queue_free()
