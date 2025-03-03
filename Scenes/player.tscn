@@ -86,13 +86,14 @@ _data = {
 "Shoulder": SubResource("Animation_831cw")
 }
 
-[sub_resource type="SphereMesh" id="SphereMesh_wshm0"]
-
 [sub_resource type="PrismMesh" id="PrismMesh_fxbl7"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wshm0"]
 
 [node name="Player" type="Node3D" node_paths=PackedStringArray("camera_pivot", "rig")]
 script = ExtResource("1_j6rlq")
 jump_force = 5.0
+char_strength = 80
 camera_pivot = NodePath("PlayerCam")
 rig = NodePath("CharacterBody3D/basic_guy_rig")
 
@@ -139,6 +140,11 @@ libraries = {
 [node name="IK_target" type="Node3D" parent="PlayerCam"]
 transform = Transform3D(-0.923879, 0.0193611, 0.382193, 0, 0.998719, -0.0505929, -0.382683, -0.0467418, -0.922695, 0, 0, 0)
 
+[node name="DebugTriPrism" type="MeshInstance3D" parent="PlayerCam/IK_target"]
+transform = Transform3D(-0.5, 0, 6.4075e-07, -3.25963e-08, 0.49744, -0.0505281, -6.4075e-07, -0.0505282, -0.49744, 0, 0, 0)
+visible = false
+mesh = SubResource("PrismMesh_fxbl7")
+
 [node name="RecoilController" type="Node3D" parent="PlayerCam"]
 script = ExtResource("4_lta0n")
 
@@ -157,11 +163,13 @@ visible = false
 mesh = SubResource("SphereMesh_wshm0")
 skeleton = NodePath("../../Arm_IK_Tar_R")
 
-[node name="DebugTriPrism" type="MeshInstance3D" parent="PlayerCam"]
-transform = Transform3D(0.461939, -0.00968055, -0.191097, 0, 0.499359, -0.0252964, 0.191342, 0.0233709, 0.461347, 0, 0, 0)
+[node name="Head_IK_Tar" type="Node3D" parent="PlayerCam/RecoilController"]
+
+[node name="DebugSphere" type="MeshInstance3D" parent="PlayerCam/RecoilController/Head_IK_Tar"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 visible = false
-mesh = SubResource("PrismMesh_fxbl7")
-skeleton = NodePath("../IK_target")
+mesh = SubResource("SphereMesh_wshm0")
+skeleton = NodePath("../../Arm_IK_Tar_R")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

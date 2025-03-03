@@ -664,14 +664,23 @@ process_priority = 1
 root_bone = &"Abdomen"
 tip_bone = &"Chest"
 
+[node name="Head_IK" type="SkeletonIK3D" parent="Armature/Skeleton3D"]
+process_priority = 1
+root_bone = &"Neck"
+tip_bone = &"Head"
+
 [node name="Arm_IK_R" type="SkeletonIK3D" parent="Armature/Skeleton3D"]
 process_priority = 1
 root_bone = &"UpperArm.R"
 tip_bone = &"Hand.R"
+use_magnet = true
+magnet = Vector3(-0.7, 1, 0)
 
 [node name="Arm_IK_L" type="SkeletonIK3D" parent="Armature/Skeleton3D"]
 process_priority = 1
 root_bone = &"UpperArm.L"
 tip_bone = &"Hand.L"
+use_magnet = true
+magnet = Vector3(0.4, 1.5, 0)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

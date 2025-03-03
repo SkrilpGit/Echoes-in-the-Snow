@@ -130,7 +130,7 @@ func recoil():
 		# bullet from rest to muzzle_velocity in a time determined by the barrel length
 		var KE = 0.5*mass*pow(bullet_instance.muzzle_velocity,2)
 		force = sqrt(2*KE/gun_weight)
-		print(force)
+		#print(force)
 	else:
 		print("error: bullet not found")
 		force = 0.5

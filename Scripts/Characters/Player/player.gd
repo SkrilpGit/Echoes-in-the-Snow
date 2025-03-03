@@ -9,6 +9,7 @@ extends Node3D
 # Jump force
 @export var jump_force = 10.0
 
+@export var char_strength = 100
 # Character Body
 @onready var body = $CharacterBody3D
 
