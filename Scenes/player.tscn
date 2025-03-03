@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dwyea5gush14j"]
+[gd_scene load_steps=15 format=3 uid="uid://dwyea5gush14j"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/player.gd" id="1_j6rlq"]
 [ext_resource type="PackedScene" uid="uid://cheuyvfckuj04" path="res://Scenes/basic_guy.tscn" id="2_4e32g"]
@@ -86,6 +86,8 @@ _data = {
 "Shoulder": SubResource("Animation_831cw")
 }
 
+[sub_resource type="SphereMesh" id="SphereMesh_wshm0"]
+
 [sub_resource type="PrismMesh" id="PrismMesh_fxbl7"]
 
 [node name="Player" type="Node3D" node_paths=PackedStringArray("camera_pivot", "rig")]
@@ -142,13 +144,24 @@ script = ExtResource("4_lta0n")
 
 [node name="Arm_IK_Tar_R" type="Node3D" parent="PlayerCam/RecoilController"]
 
+[node name="DebugSphere" type="MeshInstance3D" parent="PlayerCam/RecoilController/Arm_IK_Tar_R"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_wshm0")
+
 [node name="Arm_IK_Tar_L" type="Node3D" parent="PlayerCam/RecoilController"]
 
-[node name="DebugTriPrism" type="MeshInstance3D" parent="PlayerCam/RecoilController"]
+[node name="DebugSphere" type="MeshInstance3D" parent="PlayerCam/RecoilController/Arm_IK_Tar_L"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_wshm0")
+skeleton = NodePath("../../Arm_IK_Tar_R")
+
+[node name="DebugTriPrism" type="MeshInstance3D" parent="PlayerCam"]
 transform = Transform3D(0.461939, -0.00968055, -0.191097, 0, 0.499359, -0.0252964, 0.191342, 0.0233709, 0.461347, 0, 0, 0)
 visible = false
 mesh = SubResource("PrismMesh_fxbl7")
-skeleton = NodePath("../../IK_target")
+skeleton = NodePath("../IK_target")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -116,7 +116,8 @@ func _on_animation_player_animation_finished(anim_name):
 func recoil():
 	#print("HIIII")
 	recoil_controller.init_recoil()
-	var dir = b_spawn.global_position - global_position
+	var recoil_pos = Vector3(position.x,b_spawn.position.y+0.1,position.z)
+	var dir = b_spawn.global_position - to_global(recoil_pos)
 	var force = 0.5
 	recoil_controller.recoil(-dir,force)
 	pass

@@ -20,6 +20,7 @@ extends Node3D
 var aiming = false
 var input_dir = Vector2.ZERO
 var esc_tog = true
+var pause = false
 
 signal fire_pressed()
 signal fire_released()
@@ -47,11 +48,21 @@ func _input(_event):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			camera_pivot.input_enabled = false
 			esc_tog = false
+			#Engine.time_scale = 0.0
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			camera_pivot.input_enabled = true
 			esc_tog = true
-		
+			#Engine.time_scale = 1.0
+	
+	if Input.is_action_just_pressed("pause"):
+		if pause:
+			Engine.time_scale = 1.0
+			pause = false
+		else:
+			Engine.time_scale = 0.0
+			pause = true
+	
 	if body.is_on_floor() and Input.is_action_just_pressed("jump"):
 		body.velocity.y = jump_force
 
