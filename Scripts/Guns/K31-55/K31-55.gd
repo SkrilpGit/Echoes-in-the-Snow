@@ -145,6 +145,7 @@ func spawn_bullet():
 	bullet_instance.dir = direction
 	bullet_instance.creator = owner
 	get_tree().get_root().add_child.call_deferred(bullet_instance)
+	recoil()
 	#print("bullet b_spawned")
 
 func eject_casing():
