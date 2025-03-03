@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://cg81n1tiownma"]
 
 [ext_resource type="ArrayMesh" uid="uid://dtwqjotdq5u4y" path="res://Resources/Objects/sniper_tower.obj" id="1_fmc8x"]
 
