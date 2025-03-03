@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://ciqfgyacq1tfe"]
 
 [ext_resource type="Script" path="res://Scripts/Guns/Bullet.gd" id="1_vdvsn"]
 [ext_resource type="ArrayMesh" uid="uid://djy253l4fr2cb" path="res://Resources/Objects/K31_Bullet.obj" id="1_yqlmi"]
@@ -13,7 +13,7 @@ data = PackedVector3Array(0.0208, 0.0252, 0.126, 0.0325, -0.0032, 0.126, -0.0076
 script = ExtResource("1_vdvsn")
 muzzle_velocity = 915.0
 bullet_weight = 42.0
-air_resistance = 0.78
+BC = 1.05
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)

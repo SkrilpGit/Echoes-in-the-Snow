@@ -1,6 +1,6 @@
 extends Camera3D
 
-@export var zoom_max = 10
+@export var zoom_max = 15
 @export var zoom_min = 1
 @export var zoom_step = 0.5
 
@@ -29,6 +29,7 @@ func _input(_event):
 			change_mode()
 
 func _ready():
+	fov = zoom_max
 	MODE.set_text("Mode: MAGNIFICATION")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

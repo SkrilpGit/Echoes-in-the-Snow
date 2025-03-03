@@ -1,11 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://i71nwwdacq6n"]
+[gd_scene load_steps=24 format=3 uid="uid://86y18lc16cyn"]
 
 [ext_resource type="Script" path="res://Scripts/Guns/K31-55/K31-55.gd" id="1_kcebn"]
 [ext_resource type="AnimationLibrary" uid="uid://vau1lawu12cd" path="res://Animations/basic_rig/K31_anims2.res" id="2_jxeau"]
 [ext_resource type="PackedScene" uid="uid://cchypb422moo8" path="res://Scenes/K31_Bullet.tscn" id="2_tssna"]
-[ext_resource type="Script" path="res://Scenes/Scope.gd" id="3_kh0d6"]
-[ext_resource type="PackedScene" uid="uid://ln2knglxnwfe" path="res://Scenes/K31_casing.tscn" id="3_qee8b"]
+[ext_resource type="PackedScene" path="res://Scenes/K31_casing.tscn" id="3_qee8b"]
 [ext_resource type="PackedScene" uid="uid://wd65cqndsi8o" path="res://Scenes/Scope_hud.tscn" id="4_0uo4f"]
+[ext_resource type="Script" path="res://Scripts/Guns/Scope.gd" id="5_ldlb6"]
 [ext_resource type="Texture2D" uid="uid://xey3al7pobfr" path="res://Resources/Images/Crosshair.png" id="7_txavq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mso7f"]
@@ -686,6 +686,8 @@ _data = {
 
 [node name="K31-55" type="Node3D" node_paths=PackedStringArray("anim_ctrl")]
 script = ExtResource("1_kcebn")
+barrel_length = 652
+gun_weight = 4.0
 anim_ctrl = NodePath("GunPlayer")
 rig_anim_lib = ExtResource("2_jxeau")
 bullet = ExtResource("2_tssna")
@@ -719,7 +721,7 @@ bones/3/name = "Bolt"
 bones/3/parent = 0
 bones/3/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.703889, -0.67257)
 bones/3/enabled = true
-bones/3/position = Vector3(0, 0.703889, -2.00995)
+bones/3/position = Vector3(0, 0.703889, -0.67257)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Casing"
@@ -733,12 +735,11 @@ bones/5/name = "Bullet_2"
 bones/5/parent = 0
 bones/5/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.508712, 0.294493)
 bones/5/enabled = true
-bones/5/position = Vector3(0, 0.704588, 0.301784)
+bones/5/position = Vector3(0, 0.508712, 0.294493)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
 bones/5/scale = Vector3(1, 1, 1)
 
 [node name="Bullet" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-visible = false
 mesh = SubResource("ArrayMesh_pifp3")
 skin = SubResource("Skin_dho4v")
 
@@ -747,7 +748,6 @@ mesh = SubResource("ArrayMesh_78m63")
 skin = SubResource("Skin_dho4v")
 
 [node name="Casing" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-visible = false
 mesh = SubResource("ArrayMesh_7svwr")
 skin = SubResource("Skin_dho4v")
 
@@ -769,8 +769,9 @@ libraries = {
 [node name="Scope" type="Camera3D" parent="." node_paths=PackedStringArray("HUD", "MODE", "mag", "elev", "wind")]
 transform = Transform3D(-1, 5.18473e-09, 8.72689e-08, 0, 0.99824, -0.0593064, -8.74228e-08, -0.0593064, -0.99824, 0, 1.36008, 2.55555)
 fov = 10.0
+near = 1.0
 far = 15000.0
-script = ExtResource("3_kh0d6")
+script = ExtResource("5_ldlb6")
 HUD = NodePath("Scope_HUD")
 MODE = NodePath("Scope_HUD/Mode")
 mag = NodePath("Scope_HUD/Magnitude")
