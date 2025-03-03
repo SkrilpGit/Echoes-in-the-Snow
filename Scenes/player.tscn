@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/Characters/MovementStates.gd" id="7_oj30a"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xhxly"]
+height = 2.7
 
 [sub_resource type="Animation" id="Animation_pl1nh"]
 resource_name = "ADS"
@@ -92,7 +93,7 @@ _data = {
 
 [node name="Player" type="Node3D" node_paths=PackedStringArray("camera_pivot", "rig")]
 script = ExtResource("1_j6rlq")
-jump_force = 5.0
+gravity = 30.0
 char_strength = 80
 camera_pivot = NodePath("PlayerCam")
 rig = NodePath("CharacterBody3D/basic_guy_rig")
@@ -100,11 +101,10 @@ rig = NodePath("CharacterBody3D/basic_guy_rig")
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1.19644, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_xhxly")
 
 [node name="basic_guy_rig" parent="CharacterBody3D" instance=ExtResource("2_4e32g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.26079, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.35, 0)
 
 [node name="Skeleton3D" parent="CharacterBody3D/basic_guy_rig/Armature" index="0"]
 bones/2/rotation = Quaternion(-7.17878e-09, -0.0984797, 1.43491e-09, 0.995139)

@@ -1,7 +1,8 @@
 extends Node3D
 
 # Movement speed
-@export var move_speed = 5.0
+@export var MOVE_SPEED = 5.0
+var move_speed : float
 
 # Gravity
 @export var gravity = 9.8
@@ -34,6 +35,7 @@ var equipped : Node3D
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	move_speed = MOVE_SPEED
 
 func _input(_event):
 	
@@ -65,6 +67,11 @@ func _input(_event):
 			Engine.time_scale = 0.0
 			pause = true
 	
+	if Input.is_action_pressed("move_run"):
+		move_speed = MOVE_SPEED*2
+	if Input.is_action_just_released("move_run"):
+		move_speed = MOVE_SPEED
+	
 	if body.is_on_floor() and Input.is_action_just_pressed("jump"):
 		body.velocity.y = jump_force
 
@@ -78,7 +85,8 @@ func _physics_process(delta):
 	
 	body.velocity.x = direction.x * move_speed
 	body.velocity.z = direction.z * move_speed
-	body.velocity.y -= gravity * delta
+	if !body.is_on_floor() and body.velocity.y > -100:
+		body.velocity.y -= gravity * delta
 
 	body.move_and_slide()
 	CamStates._state_logic(delta)

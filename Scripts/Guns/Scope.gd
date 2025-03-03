@@ -57,8 +57,8 @@ func increment(inc):
 			Wind(inc)
 
 func Zoom(In):
-	print(zoom_step)
-	print(fov)
+	#print(zoom_step)
+	#print(fov)
 	var zoom = fov
 	var step = snapped((zoom / 10),zoom_step)
 	if step == 0:
@@ -98,4 +98,4 @@ func change_mode():
 		mode.WINDAGE:
 			scope_mode = mode.MAGNIFICATION
 			MODE.set_text("Mode: MAGNIFICATION")
-	print(scope_mode)
+	#print(scope_mode)
