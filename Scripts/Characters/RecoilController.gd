@@ -21,6 +21,7 @@ var arm_ik_l : SkeletonIK3D
 var arm_tar_l : Node3D
 
 var strength : float
+var recovery_step : float
 
 signal recoil_recovered()
 
@@ -77,21 +78,24 @@ func init_recoil():
 
 func _process(delta):
 	if fired:
-		#init_recoil()
 		if recoil_controller.position.distance_to(recoil_offset_pos) > 0.05:
 			var dir = recoil_controller.position - recoil_offset_pos
 			var dir2 = spine_target.position - sIKoffset_pos
 			dir2 = dir2.normalized()
 			dir = dir.normalized()
-			recoil_controller.position -= dir * (1*strength/100)*delta
-			spine_target.position += dir2 * (2*strength/100)*delta
-			recoil_controller.rotation = lerp(recoil_controller.rotation,recoil_offset_rot,10*delta)
-			spine_target.rotation = lerp(spine_target.rotation,sIKoffset_rot,10*delta)
+			
+			recoil_controller.position -= dir * (1*recovery_step)*delta
+			spine_target.position += dir2 * (2*recovery_step)*delta
+			
+			recoil_controller.rotation = lerp(recoil_controller.rotation,recoil_offset_rot,10*recovery_step*delta)
+			spine_target.rotation = lerp(spine_target.rotation,sIKoffset_rot,10*recovery_step*delta)
 		elif recoil_controller.position.distance_to(recoil_offset_pos) <= 0.05:
 			fired = false
 			spine_target.position = Vector3.ZERO
+			
 			spine_target.rotation = sIKoffset_rot
 			recoil_controller.rotation = recoil_offset_rot
+			
 			recoil_recovered.emit()
 			call_deferred("stop_recoil_IK")
 			
@@ -100,11 +104,20 @@ func recoil(dir: Vector3,force: float):
 	#print(recoil_controller.position)
 	#print(dir)
 	force = force/strength
-	var rot = calculate_recoil_rot(dir,force)
+	print(force/2)
+	var overflow = 0
+	if force >= 0.5:
+		overflow = force - 0.5
+		force = 0.5
+	var rot = calculate_recoil_rot(dir,force,overflow)
+	
+	recovery_step = clamp(strength/100 * force,strength/100,5)
+	
 	recoil_controller.global_position += dir * force/2
-	spine_target.global_position += dir * force
-	spine_target.rotation_degrees += Vector3(-rot.x*2,-rot.y,rot.z)*5
 	recoil_controller.rotation_degrees += rot
+	
+	spine_target.global_position += dir * force
+	spine_target.rotation_degrees += Vector3(-rot.x,-rot.y,rot.z)*5
 	#print(recoil_controller.rotation_degrees)
 	arm_ik_r.set_interpolation(1.0)
 	arm_ik_l.set_interpolation(1.0)
@@ -112,14 +125,14 @@ func recoil(dir: Vector3,force: float):
 	fired = true
 	pass
 
-func calculate_recoil_rot(dir,mag):
+func calculate_recoil_rot(dir,mag,overflow):
 	var rot_y = 0
 	var rot_x = 0
 	mag *= 5
 	
 	var dif = dir - position
-	rot_y = dif.normalized().length() * mag
-	rot_x = mag
+	rot_y = dif.normalized().length() * mag + overflow*4
+	rot_x = mag + overflow*4
 	var final_rot = Vector3(rot_x,rot_y,0)
 	return final_rot
 

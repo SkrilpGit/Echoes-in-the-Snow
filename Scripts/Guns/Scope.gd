@@ -3,6 +3,7 @@ extends Camera3D
 @export var zoom_max = 15
 @export var zoom_min = 1
 @export var zoom_step = 0.5
+@export var base_zero : Vector3
 
 @export var HUD : Node2D
 @export var MODE : Label
@@ -30,6 +31,9 @@ func _input(_event):
 
 func _ready():
 	fov = zoom_max
+	#print(rotation)
+	rotation_degrees = base_zero
+	#print(base_zero)
 	MODE.set_text("Mode: MAGNIFICATION")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

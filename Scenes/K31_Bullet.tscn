@@ -13,7 +13,8 @@ data = PackedVector3Array(0.0208, 0.0252, 0.126, 0.0325, -0.0032, 0.126, -0.0076
 script = ExtResource("1_pbg8a")
 muzzle_velocity = 770.0
 bullet_weight = 8.4
-BC = 0.501
+BC = 0.5
+cal = 7.5
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_guft3")
