@@ -9,12 +9,13 @@ data = PackedVector3Array(0.0208, 0.0252, 0.126, 0.0325, -0.0032, 0.126, -0.0076
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ye5di"]
 
-[node name="7,5x55mm Swiss" type="Node3D"]
+[node name="7,5x55mm Swiss" type="Node3D" node_paths=PackedStringArray("tracer")]
 script = ExtResource("1_pbg8a")
 muzzle_velocity = 770.0
 bullet_weight = 8.4
 BC = 0.5
 cal = 7.5
+tracer = NodePath("DebugBean")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_guft3")
@@ -26,7 +27,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_ccbrt")
 
 [node name="DebugBean" type="MeshInstance3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, -2.18557e-07, -5, 0, 5, -2.18557e-07, 0, 0, 0)
+transform = Transform3D(5, 0, 0, 0, -6.55671e-07, -5, 0, 15, -2.18557e-07, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_ye5di")
 script = ExtResource("3_gsq3a")
 colour = Color(0.752941, 0, 0, 1)

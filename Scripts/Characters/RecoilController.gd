@@ -34,7 +34,7 @@ func _ready():
 	head_ik = skeleton.find_child("Head_IK")
 	recoil_offset_pos = recoil_controller.position
 	recoil_offset_rot = recoil_controller.rotation
-	print(recoil_controller.get_parent())
+	#print(recoil_controller.get_parent())
 	
 	strength = char.char_strength
 	
@@ -104,7 +104,7 @@ func recoil(dir: Vector3,force: float):
 	#print(recoil_controller.position)
 	#print(dir)
 	force = force/strength
-	print(force/2)
+	#print(force/2)
 	var overflow = 0
 	if force >= 0.5:
 		overflow = force - 0.5

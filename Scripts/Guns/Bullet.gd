@@ -10,6 +10,7 @@ enum drag_function{
 }
 @export var bullet_shape : drag_function
 @export var terminal_velocity = -100.0
+@export var tracer : MeshInstance3D
 
 var mach_values = [
 0.00, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90, 1.00, 1.10, 
@@ -36,6 +37,7 @@ var counter = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#print("YOOOOOOOOOOOOOO")
+	tracer.visible = false
 	speed = muzzle_velocity
 	prev_pos = position
 	spawn_pos = global_position
@@ -70,6 +72,9 @@ func _process(delta):
 	
 	lifetime += delta
 	
+	#tracer.scale.y = speed/10
+	#tracer.position.z = -tracer.scale.y/2
+	
 	distance = spawn_pos - global_position
 	distance = distance.length()
 	
@@ -81,8 +86,12 @@ func _process(delta):
 	position += velocity * delta
 	global_position.y += gravity * delta
 	
+	#look_at_from_position(position,velocity)
+	#print(transform.basis*velocity)
+	
 	if distance != 0:
 		calc_drag(delta)
+		tracer.visible = true
 	
 	if distance >= counter:
 		#print(speed,"m/s at ",distance,"m")

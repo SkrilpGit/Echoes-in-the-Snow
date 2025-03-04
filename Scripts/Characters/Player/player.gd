@@ -69,8 +69,10 @@ func _input(_event):
 	
 	if Input.is_action_pressed("move_run"):
 		move_speed = MOVE_SPEED*2
+		rig.anim_ctrl.speed_scale = 4
 	if Input.is_action_just_released("move_run"):
 		move_speed = MOVE_SPEED
+		rig.anim_ctrl.speed_scale = 2
 	
 	if body.is_on_floor() and Input.is_action_just_pressed("jump"):
 		body.velocity.y = jump_force

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Guns/K31-55/K31-55.gd" id="1_kcebn"]
 [ext_resource type="AnimationLibrary" uid="uid://vau1lawu12cd" path="res://Animations/basic_rig/K31_anims2.res" id="2_jxeau"]
-[ext_resource type="PackedScene" uid="uid://ciqfgyacq1tfe" path="res://Scenes/50bmg.tscn" id="3_cu0rw"]
+[ext_resource type="PackedScene" uid="uid://cchypb422moo8" path="res://Scenes/K31_Bullet.tscn" id="2_tssna"]
 [ext_resource type="PackedScene" path="res://Scenes/K31_casing.tscn" id="3_qee8b"]
 [ext_resource type="PackedScene" uid="uid://wd65cqndsi8o" path="res://Scenes/Scope_hud.tscn" id="4_0uo4f"]
 [ext_resource type="Script" path="res://Scripts/Guns/Scope.gd" id="5_ldlb6"]
@@ -690,7 +690,7 @@ barrel_length = 652
 gun_weight = 4.0
 anim_ctrl = NodePath("GunPlayer")
 rig_anim_lib = ExtResource("2_jxeau")
-bullet = ExtResource("3_cu0rw")
+bullet = ExtResource("2_tssna")
 casing = ExtResource("3_qee8b")
 
 [node name="Armature" type="Node3D" parent="."]
