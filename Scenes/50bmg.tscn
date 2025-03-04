@@ -11,7 +11,7 @@ data = PackedVector3Array(0.0208, 0.0252, 0.126, 0.0325, -0.0032, 0.126, -0.0076
 
 [node name="50BMG" type="Node3D"]
 script = ExtResource("1_vdvsn")
-muzzle_velocity = 915.0
+muzzle_velocity = 860.0
 bullet_weight = 42.0
 BC = 1.05
 

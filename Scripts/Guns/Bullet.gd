@@ -37,17 +37,18 @@ func _process(delta):
 	distance = distance.length()
 	
 	if gravity > terminal_velocity:
-		gravity += -9.8 * delta
-	calc_drag(delta)
+		gravity += -9 * delta
 	prev_pos = position
 	velocity = dir * speed
 	drop += -gravity * delta
 	position += velocity * delta
 	global_position.y += gravity * delta
 	
+	calc_drag(delta)
+	
 	if distance >= counter:
-		#print(speed,"m/s at ",distance,"m")
-		#print(speed-prev_speed)
+		print(speed,"m/s at ",distance,"m")
+		print(speed-prev_speed)
 		prev_speed = speed
 		counter += 100
 	
@@ -66,11 +67,11 @@ func calc_drag(delta):
 	var drag
 	#supersonic
 	if speed >= 345:
-		drag = (pow(speed,2))*BC/75
+		drag = (pow(speed,2))/(300*BC)
 	else:
-		drag = (pow(speed,2))*BC/200
-	speed -= drag/bullet_weight * delta
-	#print(speed)
+		drag = (pow(speed,2))/(800*BC)
+	speed -= drag/sqrt(bullet_weight*2) * delta
+	#print(pow(speed,2)/(150*BC))
 
 func prnt_info(target_name):
 	print("bullet: ",name,"\n",
@@ -89,6 +90,6 @@ func hit(target : Object = null):
 			real_target.hit()
 		target_name = target.get_parent().get_parent().name
 	
-	#prnt_info(target_name)
+	prnt_info(target_name)
 	
 	queue_free()
