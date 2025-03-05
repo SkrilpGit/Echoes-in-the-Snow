@@ -154,3 +154,7 @@ func hit(target : Object = null):
 	#prnt_info(target_name)
 	
 	queue_free()
+
+
+func _on_audio_finished():
+	find_child("AudioStreamPlayer3D").playing = true

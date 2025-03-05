@@ -1,0 +1,13 @@
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://1g1sol87fhd6"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_vivym"]
+resource_name = "Reverb"
+room_size = 0.0
+damping = 0.0
+hipass = 1.0
+dry = 0.8
+wet = 0.25
+
+[resource]
+bus/0/effect/0/effect = SubResource("AudioEffectReverb_vivym")
+bus/0/effect/0/enabled = true

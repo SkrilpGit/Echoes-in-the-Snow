@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b7o2hknvp3tco"
+path="res://.godot/imported/Dred Guns_2.wav-aa5b171ccac12bc1ec2c99cd1c41e6c6.sample"
+
+[deps]
+
+source_file="res://Resources/Sound/Dred Guns_2.wav"
+dest_files=["res://.godot/imported/Dred Guns_2.wav-aa5b171ccac12bc1ec2c99cd1c41e6c6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

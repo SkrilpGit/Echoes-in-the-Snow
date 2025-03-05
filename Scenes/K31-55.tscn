@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://86y18lc16cyn"]
+[gd_scene load_steps=25 format=3 uid="uid://86y18lc16cyn"]
 
 [ext_resource type="Script" path="res://Scripts/Guns/K31-55/K31-55.gd" id="1_kcebn"]
 [ext_resource type="AnimationLibrary" uid="uid://vau1lawu12cd" path="res://Animations/basic_rig/K31_anims2.res" id="2_jxeau"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://wd65cqndsi8o" path="res://Scenes/Scope_hud.tscn" id="4_0uo4f"]
 [ext_resource type="Script" path="res://Scripts/Guns/Scope.gd" id="5_ldlb6"]
 [ext_resource type="Texture2D" uid="uid://xey3al7pobfr" path="res://Resources/Images/Crosshair.png" id="7_txavq"]
+[ext_resource type="AudioStream" uid="uid://b7o2hknvp3tco" path="res://Resources/Sound/Dred Guns_2.wav" id="8_nvy8b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mso7f"]
 
@@ -810,6 +811,12 @@ offset_bottom = 119.0
 
 [node name="Crosshair" type="Sprite2D" parent="Scope/Scope_HUD"]
 texture = ExtResource("7_txavq")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_nvy8b")
+max_db = 0.0
+pitch_scale = 0.7
+max_distance = 300.0
 
 [connection signal="animation_finished" from="GunPlayer" to="." method="_on_animation_player_animation_finished"]
 

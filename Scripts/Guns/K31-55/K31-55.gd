@@ -146,6 +146,7 @@ func spawn_bullet():
 	bullet_instance.creator = owner
 	get_tree().get_root().add_child.call_deferred(bullet_instance)
 	recoil()
+	find_child("AudioStreamPlayer3D").playing = true
 	#print("bullet b_spawned")
 
 func eject_casing():
